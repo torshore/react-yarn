@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import StoriesHome from './StoriesHome';
 // import '../../styles/App.css';
 import { Navbar, Nav } from 'react-bootstrap';
+import {Link, Route, BrowserRouter as Router} from 'react-router-dom';
 
 export default class NavBar extends Component {
   render() {
@@ -14,7 +16,16 @@ export default class NavBar extends Component {
           </Navbar.Header>
         </Navbar>
         <Nav>
-          <Link to="/stories" component={StoriesHome}>
+        <Router>
+        <div>
+          <ul>
+             <li> <Link to="/stories"> Play!</Link> </li>
+          </ul>
+
+          <Route path="/stories" component={StoriesHome}/>
+           </div>
+        </Router>
+
         </Nav>
       </div>
     )

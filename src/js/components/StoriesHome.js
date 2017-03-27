@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router';
-import { getStories } from '../actions/index.js';
+import { getStories } from '../actions/index';
 
 
 class StoriesHome extends Component{
@@ -30,7 +30,7 @@ class StoriesHome extends Component{
           </Link>
         </div>
 
-        Articles Home Page
+        Stories` Home Page
         <ul className="list-group">
           {this.renderStories()}
         </ul>
@@ -43,7 +43,7 @@ function mapStateToProps(state){
   return {stories: state.stories.all }
 }
 
-export default connect(mapStateToProps, {stories: getStories })(StoriesHome);
+export default connect(mapStateToProps, {getStories: getStories })(StoriesHome);
 
 
 
