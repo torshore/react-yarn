@@ -6,7 +6,7 @@ import { getStories } from '../actions/index';
 
 class StoriesHome extends Component{
   componentWillMount(){
-    this.props.getStories();
+    this.props.getStories((data) => console.log);
   }
 
   renderStories(){

@@ -1,20 +1,28 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
-import App from './js/components/App'
-import Store from './store.js';
-import routes from './js/routes.js'
+import { BrowserRouter, Route, IndexRoute } from 'react-router-dom';
+import App from './js/components/App';
+import StoriesHome from './js/components/StoriesHome';
+import NewStory from './js/components/NewStory';
+import SingleStoryShow from './js/components/SingleStoryShow';
+import store, { history } from './store.js';
+
 import '../styles/index.css';
 import 'react-bootstrap';
 
-const StoreInstance = Store();
-
-ReactDOM.render(
- <Provider store={StoreInstance}>
-   <BrowserRouter history={history} routes={routes}>
-     <App />
+// const StoreInstance = Store();
+const router = (
+  <Provider store={store}>
+   <BrowserRouter history={history}>
+     <Route path="/" component={App}>
+       <IndexRoute component={StoriesHome} />
+       <Route path="stories/new" component={NewStory} />
+       <Route path="stories/:id" component={SingleStoryShow} />
+     </Route>
    </BrowserRouter>
- </Provider>,
- document.getElementById('root')
-);
+ </Provider>
+  )
+
+render(router, document.getElementById('root'));
+
