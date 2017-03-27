@@ -1,9 +1,20 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App.js';
-
-import './index.css';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import App from './js/components/App'
+import Store from './store.js';
+import routes from './js/routes.js'
+import '../styles/index.css';
 import 'react-bootstrap';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const StoreInstance = Store();
+
+ReactDOM.render(
+ <Provider store={StoreInstance}>
+   <BrowserRouter history={history} routes={routes}>
+     <App />
+   </BrowserRouter>
+ </Provider>,
+ document.getElementById('root')
+);
