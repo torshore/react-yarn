@@ -1,15 +1,19 @@
-import { GET_STORIES, GET_STORY } from '../actions/index.js';
+import { GET_STORIES } from '../actions/index.js';
 
+const initialState = {
+  stories: []
+}
 
-const INITIAL_STATE = {all: [], story: null};
-
-export default function(state = INITIAL_STATE, action){
+export default function(state = initialState, action){
   switch(action.type){
-    case GET_STORIES:
-      return { ...state, all: action.payload.data} ;
-    case GET_STORY:
-      return { ...state, story: action.payload.data} ;
+    case "GET_STORIES":
+      debugger
+      return {
+        ...state,
+        stories: action.payload
+      }
     default:
+      debugger
       return state;
   }
 }

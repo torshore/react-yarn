@@ -1,11 +1,12 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, IndexRoute } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import App from './js/components/App';
+import Main from './js/components/Main';
 import StoriesHome from './js/components/StoriesHome';
-import NewStory from './js/components/NewStory';
-import SingleStoryShow from './js/components/SingleStoryShow';
+// import NewStory from './js/components/NewStory';
+// import SingleStoryShow from './js/components/SingleStoryShow';
 import store, { history } from './store.js';
 
 import '../styles/index.css';
@@ -15,11 +16,10 @@ import 'react-bootstrap';
 const router = (
   <Provider store={store}>
    <BrowserRouter history={history}>
-     <Route path="/" component={App}>
-       <IndexRoute component={StoriesHome} />
-       <Route path="stories/new" component={NewStory} />
-       <Route path="stories/:id" component={SingleStoryShow} />
-     </Route>
+      <App>
+          <Route exact={true} path="/" component={Main} />
+          <Route path="/stories" component={StoriesHome} />
+      </App>
    </BrowserRouter>
  </Provider>
   )

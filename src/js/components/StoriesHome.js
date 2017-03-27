@@ -5,11 +5,12 @@ import { getStories } from '../actions/index';
 
 
 class StoriesHome extends Component{
-  componentWillMount(){
-    this.props.getStories((data) => console.log);
+
+  componentDidMount() {
+    this.props.dispatch(getStories());
   }
 
-  renderStories(){
+  renderStories() {
     return this.props.stories.map((story) => {
       return (
         <li key={story.id}>
@@ -25,12 +26,10 @@ class StoriesHome extends Component{
       <div className="container">
 
         <div>
-          <Link to="stories/new" className="btn btn-warning">
-            Create Story
-          </Link>
+
         </div>
 
-        Stories` Home Page
+        Stories Home Page
         <ul className="list-group">
           {this.renderStories()}
         </ul>
@@ -38,12 +37,15 @@ class StoriesHome extends Component{
     );
   }
 }
-
+         // <Link to="stories/new" className="btn btn-warning">
+          //   Create Story
+          // </Link>
 function mapStateToProps(state){
-  return {stories: state.stories.all }
+  debugger
+  return {stories: state.stories.stories }
 }
 
-export default connect(mapStateToProps, {getStories: getStories })(StoriesHome);
+export default connect(mapStateToProps)(StoriesHome);
 
 
 

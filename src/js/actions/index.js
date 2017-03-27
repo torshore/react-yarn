@@ -4,10 +4,22 @@ import 'whatwg-fetch';
 
 
 export const getStories = () => {
- const request = axios.get(`${API_URL}/stories`);
-  return{
-    type: GET_STORIES,
-    payload: request
+  return dispatch => {
+
+    fetch('/stories')
+      .then(response => response.json())
+      .then((data) => {
+        debugger
+        return dispatch({type: "GET_STORIES", stories: data.data })
+      })
+      .catch(err => console.log(err))
+
+  }
+}
+
+export const increment = () => {
+  return {
+    type: 'INCREMENT'
   }
 }
 
