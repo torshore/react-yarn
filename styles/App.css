@@ -1,9 +1,29 @@
+@import url("https://fonts.googleapis.com/css?family=Arvo");
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+
 html {
 background: url(/4668.jpg) no-repeat center center fixed;
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
 background-size: cover;
+font-family: 'Cinzel Decorative', cursive;
+}
+
+.nav {
+  background-color: white;
+  height: 60px;
+  font-family: 'Elianto';
+}
+
+.nav h1 {
+  display: inline;
+  margin: auto;
+  font-family: 'Elianto';
+}
+
+.links {
+  float: right;
 }
 
 .jumbotron {
@@ -34,19 +54,40 @@ background-size: cover;
   background-color: white;
 }
 
-.nav {
+.media-box {
+  border: 1px solid black;
   background-color: white;
-  height: 60px;
+  font-size: 120%;
+  font-family: 'Arvo', serif;
+  width: 50%;
+  margin: 10px;
+  border-radius: 15px;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
 }
 
-.nav h1 {
-  display: inline;
-  margin: auto;
+.media-box:hover {
+  border: 3px solid black;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.7);
 }
 
-.links {
-  float: right;
+.media-head {
+  display: -webkit-box;
 }
+
+.story-img {
+  margin: 15px 10px;
+  width: 80px;
+  height: 90px;
+}
+
+.media-tag {
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+
+
+
+
 
 
 
