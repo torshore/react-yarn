@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router';
+// import {Link} from 'react-router';
 import { getStories } from '../actions/index';
 
 
@@ -16,7 +16,7 @@ class StoriesHome extends Component{
         <li key={story.id}>
 
         <h4> {story.title} </h4>
-        <img src={story.image}/>
+
 
         </li>
       )

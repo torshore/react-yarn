@@ -1,5 +1,5 @@
 html {
-background: url(/dots.jpg) no-repeat center center fixed;
+background: url(/4668.jpg) no-repeat center center fixed;
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
@@ -36,7 +36,16 @@ background-size: cover;
 
 .nav {
   background-color: white;
-  border: 1px solid black;
+  height: 60px;
+}
+
+.nav h1 {
+  display: inline;
+  margin: auto;
+}
+
+.links {
+  float: right;
 }
 
 

@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import App from './js/components/App';
-import Main from './js/components/Main';
+
 import StoriesHome from './js/components/StoriesHome';
 // import NewStory from './js/components/NewStory';
 // import SingleStoryShow from './js/components/SingleStoryShow';
@@ -17,7 +17,7 @@ const router = (
   <Provider store={store}>
    <BrowserRouter history={history}>
       <App>
-          <Route exact={true} path="/" component={Main} />
+          <Route exact={true} path="/" />
           <Route path="/stories" component={StoriesHome} />
       </App>
    </BrowserRouter>
