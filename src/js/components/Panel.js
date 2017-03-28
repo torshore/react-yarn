@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Picture from './Picture.jsx';
-import TextBox from './TextBox.jsx';
-import './App.css';
+import Picture from './Picture';
+import TextBox from './TextBox';
+import '../../../styles/App.css';
 import {Jumbotron, Col} from 'react-bootstrap';
 
 

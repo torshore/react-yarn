@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Media } from 'react-bootstrap';
 // import {Link} from 'react-router';
 import { getStories } from '../actions/index';
 
@@ -13,12 +14,19 @@ class StoriesHome extends Component{
   renderStories() {
     return this.props.stories.map((story) => {
       return (
-        <li key={story.id}>
+        <Media key={story.id} className="media-box">
+          <Media.Left align="middle" className="media-head">
+            <img src={story.image} className="story-img" alt="Story"/>
+              <div>
+               <p className="media-head"> <strong>{story.title}</strong> </p>
+               <p className="media-tag"><br/>{story.tagline}</p>
+              </div>
+           </Media.Left>
+           <Media.Body>
 
-        <h4> {story.title} </h4>
 
-
-        </li>
+           </Media.Body>
+        </Media>
       )
     });
   }
@@ -26,12 +34,6 @@ class StoriesHome extends Component{
   render(){
     return(
       <div className="container">
-
-        <div>
-
-        </div>
-
-        Stories Home Page
         <ul className="list-group">
           {this.renderStories()}
         </ul>

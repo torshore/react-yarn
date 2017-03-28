@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Row, Image} from 'react-bootstrap';
-import './App.css';
+
 
 export default class Picture extends Component {
   render() {

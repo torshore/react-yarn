@@ -11,7 +11,7 @@ export default class NavBar extends Component {
           <Navbar.Header>
             <Navbar.Brand>
               <h1>
-                <Link to="/">Yarn</Link>
+                <Link to="/">YARN</Link>
               </h1>
             </Navbar.Brand>
           </Navbar.Header>
