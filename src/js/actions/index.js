@@ -1,5 +1,4 @@
-import { GET_STORIES } from './types.js';
-import { axios } from 'axios';
+// import { GET_STORIES } from './types.js';
 import 'whatwg-fetch';
 
 
@@ -9,8 +8,7 @@ export const getStories = () => {
     fetch('/stories')
       .then(response => response.json())
       .then((data) => {
-        debugger
-        return dispatch({type: "GET_STORIES", stories: data.data })
+        return dispatch({type: "GET_STORIES", payload: data.data })
       })
       .catch(err => console.log(err))
 

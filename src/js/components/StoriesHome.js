@@ -14,13 +14,15 @@ class StoriesHome extends Component{
     return this.props.stories.map((story) => {
       return (
         <li key={story.id}>
-          <Link to={`stories/${story.id}`}>
-            <h4> {story.title} </h4>
-          </Link>
+
+        <h4> {story.title} </h4>
+        <img src={story.image}/>
+
         </li>
       )
     });
   }
+
   render(){
     return(
       <div className="container">
@@ -41,7 +43,6 @@ class StoriesHome extends Component{
           //   Create Story
           // </Link>
 function mapStateToProps(state){
-  debugger
   return {stories: state.stories.stories }
 }
 
