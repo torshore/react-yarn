@@ -8,7 +8,8 @@ import allReducers from  './js/reducers/index.js';
 
 const store = createStore(
   allReducers,
-  applyMiddleware(thunk)
+  applyMiddleware(thunk),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 export const history = syncHistoryWithStore(browserHistory, store);
