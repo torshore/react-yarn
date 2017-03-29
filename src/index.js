@@ -20,7 +20,7 @@ const router = (
       <App>
           <Route exact={true} path="/" />
           <Switch>
-            <Route path="/stories/:storyid/panels/:id" component={SingleStoryShow}/>
+            <Route path="/stories/:storyid/panels/:panelid" component={SingleStoryShow}/>
             <Route path="/stories" component={StoriesHome} />
           </Switch>
       </App>

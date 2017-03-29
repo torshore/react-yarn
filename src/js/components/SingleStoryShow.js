@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 // import {Link} from 'react-router';
-import { getStory } from '../actions/index';
+import { getPanel } from '../actions/index';
 
 
 
@@ -11,23 +11,19 @@ class SingleStoryShow extends Component{
   };
 
   componentDidMount() {
-    debugger;
-    this.props.dispatch(getStory(this.props.match.params.storyid));
+
+    this.props.dispatch(getPanel(this.props.match.params.storyid, this.props.match.params.panelid));
   }
 
   renderPanel() {
-    return this.props.story.map((panel) => {
-      return(
-        <div>
-          <p>Panel: {panel.body_text} </p>
-          <img> {panel.image}</img>
-        </div>
-      )
-    })
+    return(
+      <img src={this.props.panel.image} alt="panel"/>
+    )
   }
 
+
   render(){
-    if(!this.props.story) {
+    if(!this.props.panel) {
       return <div> Fetching your Adventure! </div>;
     }
 
@@ -40,8 +36,8 @@ class SingleStoryShow extends Component{
 }
 
 function mapStateToProps(state) {
-  debugger;
-  return{story: state.stories.stories}
+  return{panel: state.panel.panel};
+
 }
 
 export default connect(mapStateToProps)(SingleStoryShow);
