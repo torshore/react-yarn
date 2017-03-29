@@ -1,7 +1,8 @@
 // import { GET_STORIES } from '../actions/index.js';
 
 const initialState = {
-  stories: []
+  stories: [],
+  story: null
 }
 
 export default function(state = initialState, action){
@@ -11,7 +12,14 @@ export default function(state = initialState, action){
         ...state,
         stories: action.payload
       }
+    case "GET_STORY":
+    debugger;
+      return {
+        ...state,
+        story: action.payload
+      }
     default:
+
       return state;
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import App from './js/components/App';
 import SingleStoryShow from './js/components/SingleStoryShow';
 import StoriesHome from './js/components/StoriesHome';
@@ -19,8 +19,10 @@ const router = (
    <BrowserRouter history={history}>
       <App>
           <Route exact={true} path="/" />
-          <Route path="/stories" component={StoriesHome} />
-          <Route path="/stories/:story_id/panels/:panel_id" component={SingleStoryShow}/>
+          <Switch>
+            <Route path="/stories/:storyid/panels/:id" component={SingleStoryShow}/>
+            <Route path="/stories" component={StoriesHome} />
+          </Switch>
       </App>
    </BrowserRouter>
  </Provider>

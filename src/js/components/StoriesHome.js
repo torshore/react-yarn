@@ -22,10 +22,6 @@ class StoriesHome extends Component{
                <p className="media-tag"><br/>{story.tagline}</p>
               </div>
            </Media.Left>
-           <Media.Body>
-
-
-           </Media.Body>
         </Media>
       )
     });
@@ -34,9 +30,11 @@ class StoriesHome extends Component{
   render(){
     return(
       <div className="container">
-        <ul className="list-group">
-          {this.renderStories()}
-        </ul>
+
+          <ul className="list-group">
+            {this.renderStories()}
+          </ul>
+
       </div>
     );
   }
