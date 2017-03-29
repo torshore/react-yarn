@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Media } from 'react-bootstrap';
 // import {Link} from 'react-router';
 import { getStories } from '../actions/index';
+import { Link } from 'react-router-dom'
 
 
 class StoriesHome extends Component{
@@ -15,13 +16,15 @@ class StoriesHome extends Component{
     return this.props.stories.map((story) => {
       return (
         <Media key={story.id} className="media-box">
-          <Media.Left align="middle" className="media-head">
-            <img src={story.image} className="story-img" alt="Story"/>
-              <div>
-               <p className="media-head"> <strong>{story.title}</strong> </p>
-               <p className="media-tag"><br/>{story.tagline}</p>
-              </div>
-           </Media.Left>
+          <Link to={`/stories/${story.id}/panels/${story.firstpanel}`}>
+            <Media.Left align="middle" className="media-head">
+              <img src={story.image} className="story-img" alt="Story"/>
+                <div>
+                 <p className="media-head"> <strong>{story.title}</strong> </p>
+                 <p className="media-tag"><br/>{story.tagline}</p>
+                </div>
+             </Media.Left>
+            </Link>
         </Media>
       )
     });
