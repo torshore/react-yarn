@@ -1,21 +1,50 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 // import {Link} from 'react-router';
-import { getStory, deleteStory } from '../actions/index';
+import { getStory } from '../actions/index';
 
-export default class SingleStoryShow extends Component{
+
+
+class SingleStoryShow extends Component{
   static contextTypes = {
     router: PropTypes.object
+  };
+
+  componentDidMount() {
+    debugger;
+    this.props.dispatch(getStory(this.props.match.params.storyid));
   }
 
-
+  renderPanel() {
+    return this.props.story.map((panel) => {
+      return(
+        <div>
+          <p>Panel: {panel.body_text} </p>
+          <img> {panel.image}</img>
+        </div>
+      )
+    })
+  }
 
   render(){
+    if(!this.props.story) {
+      return <div> Fetching your Adventure! </div>;
+    }
+
     return(
-     <h1> hello </h1>
+      <div>
+        {this.renderPanel()}
+      </div>
     )
   }
 }
+
+function mapStateToProps(state) {
+  debugger;
+  return{story: state.stories.stories}
+}
+
+export default connect(mapStateToProps)(SingleStoryShow);
 
 
 

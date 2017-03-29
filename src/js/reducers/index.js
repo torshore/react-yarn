@@ -5,6 +5,7 @@ import { reducer as formReducer } from 'redux-form';
 
 const allReducers = combineReducers({
   stories: StoriesReducer,
+  story: StoriesReducer,
   routing: routerReducer,
   form: formReducer
 });

@@ -15,9 +15,15 @@ export const getStories = () => {
   }
 }
 
-export const increment = () => {
-  return {
-    type: 'INCREMENT'
+export const getStory = (storyid) => {
+  return dispatch => {
+    debugger;
+    fetch(`/stories/${storyid}/panels`)
+      .then(response => response.json())
+      .then((data) => {
+        return dispatch({type: "GET_STORY", payload: data.data})
+      })
+      .catch(err => console.log(err))
   }
 }
 
