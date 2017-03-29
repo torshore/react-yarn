@@ -15,13 +15,14 @@ export const getStories = () => {
   }
 }
 
-export const getStory = (storyid) => {
+export const getPanel = (storyid, panelid) => {
   return dispatch => {
-    debugger;
-    fetch(`/stories/${storyid}/panels`)
+
+    fetch(`/stories/${storyid}/panels/${panelid}`)
       .then(response => response.json())
       .then((data) => {
-        return dispatch({type: "GET_STORY", payload: data.data})
+        console.log(data)
+        return dispatch({type: "GET_PANEL", payload: data.data})
       })
       .catch(err => console.log(err))
   }
