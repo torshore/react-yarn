@@ -6,10 +6,9 @@ import App from './js/components/App';
 import SingleStoryShow from './js/components/SingleStoryShow';
 import StoriesHome from './js/components/StoriesHome';
 import store, { history } from './store.js';
-// import '../styles/index.css';
 import 'react-materialize';
 
-// const StoreInstance = Store();
+
 const router = (
   <Provider store={store}>
    <BrowserRouter history={history}>

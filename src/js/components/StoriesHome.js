@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Card, CardTitle, Row, Col} from 'react-materialize';
 import { getStories } from '../actions/index';
-import { Link } from 'react-router-dom'
+
 
 
 class StoriesHome extends Component{
@@ -35,11 +35,7 @@ class StoriesHome extends Component{
   render(){
     return(
       <Row>
-
-
-            {this.renderStories()}
-
-
+        {this.renderStories()}
       </Row>
     );
   }
