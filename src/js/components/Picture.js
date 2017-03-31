@@ -6,7 +6,7 @@ export default class Picture extends Component {
   render() {
     return(
         <Row>
-          <Image className="pic-size" src="`${this.props.image}`"  />
+          <Image className="pic-size" src={this.props.image}  />
         </Row>
 
     );
