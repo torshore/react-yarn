@@ -6,21 +6,15 @@ import {Jumbotron, Col} from 'reactstrap';
 
 
 
-export default class Panel extends Component {
+class Panel extends Component {
   render () {
     return (
+      <img src={this.props.panel.image} alt="Story"/>
 
-      <Col xs={12}>
-        <Jumbotron className="jumbotron">
-          <div className="image">
-            <Picture />
-          </div>
-          <div className="text-size">
-            <TextBox />
-          </div>
-        </Jumbotron>
-      </Col>
+
 
     );
   }
 }
+
+export default Panel;

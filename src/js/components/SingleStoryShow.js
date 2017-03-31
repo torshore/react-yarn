@@ -1,8 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getPanel } from '../actions/index';
+
 import { Row, Col, CardPanel} from 'react-materialize';
 import '../../../styles/App.css';
+
+import { getChoices } from '../actions/index';
 
 
 
@@ -12,8 +15,11 @@ class SingleStoryShow extends Component{
   };
 
   componentDidMount() {
+
     this.props.dispatch(getPanel(this.props.match.params.storyid, this.props.match.params.panelid));
+    this.props.dispatch(getChoices(this.props.match.params.storyid, this.props.match.params.panelid));
   }
+
 
   renderPanel() {
   return(
@@ -37,14 +43,18 @@ class SingleStoryShow extends Component{
 
     return(
       <div>
-        {this.renderPanel()}
+        <Panel panel={this.props.panel}/>
+        <Choices choices={this.props.choices}
+                  panel={this.props.panel}
+        />
       </div>
     )
   }
 }
 
 function mapStateToProps(state) {
-  return{panel: state.panel.panel};
+  return{panel: state.panel.panel,
+         choices: state.choices.choices};
 
 }
 

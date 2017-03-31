@@ -28,15 +28,15 @@ export const getPanel = (storyid, panelid) => {
   }
 }
 
+export const getChoices = (storyid, panelid) => {
+  return dispatch => {
+    fetch(`/stories/${storyid}/panels/${panelid}/choices`)
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data)
+        return dispatch({type: "GET_CHOICES", payload: data.data})
+      })
+      .catch(err => console.log(err))
+  }
+}
 
-
-
-// fetch('/stories').then(
-//     function(response) {
-//      if (response.status !== 200) {
-//        console.log('Looks like there was a problem. Status Code: ' +
-//          response.status);
-//        return;
-//      }
-//      response.json().then((json) => callback(json.data));
-//    })
