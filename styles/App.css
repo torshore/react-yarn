@@ -83,6 +83,12 @@ font-family: 'Cinzel Decorative', cursive;
 .media-tag {
   font-family: 'Josefin Sans', sans-serif;
 }
+/*placeholder. please remove when choices are styled*/
+.test {
+  background-color: white;
+  border: solid;
+  width: 20%;
+}
 
 
 

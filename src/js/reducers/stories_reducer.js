@@ -1,5 +1,3 @@
-// import { GET_STORIES } from '../actions/index.js';
-
 const initialState = {
   stories: []
 }
