@@ -1,3 +1,21 @@
+README
+
+Yarn is a Choose Your Own Adventure Builder/Player
+
+Built for Lighthouse Labs Final Project.
+
+To run:
+
+With the Yarn Rails Server On,
+
+Run npm i on the command line to install dependencies
+
+Run npm start to start the react application
+
+*The following is the readme for Create React App, which was used to start this project
+Included here for historical reasons*
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getPanel } from '../actions/index';
 import { getChoices } from '../actions/index';
 import Choices from './Choices.js';
-
+import Panel from './Panel.js';
 
 
 class SingleStoryShow extends Component{
@@ -13,17 +13,10 @@ class SingleStoryShow extends Component{
   };
 
   componentDidMount() {
-
+// function arguments are taken from the url params
     this.props.dispatch(getPanel(this.props.match.params.storyid, this.props.match.params.panelid));
     this.props.dispatch(getChoices(this.props.match.params.storyid, this.props.match.params.panelid));
   }
-
-  renderPanel() {
-    return(
-      <img src={this.props.panel.image} alt="panel"/>
-    )
-  }
-
 
   render(){
     if(!this.props.panel) {
@@ -32,10 +25,10 @@ class SingleStoryShow extends Component{
 
     return(
       <div>
-        <div>
-          {this.renderPanel()}
-        </div>
-        <Choices choices={this.props.choices}/>
+        <Panel panel={this.props.panel}/>
+        <Choices choices={this.props.choices}
+                  panel={this.props.panel}
+        />
       </div>
     )
   }
