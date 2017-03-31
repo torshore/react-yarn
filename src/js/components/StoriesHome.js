@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Media } from 'react-bootstrap';
-// import {Link} from 'react-router';
+import {Card, CardTitle, Row, Col} from 'react-materialize';
 import { getStories } from '../actions/index';
 
 
@@ -14,34 +13,38 @@ class StoriesHome extends Component{
   renderStories() {
     return this.props.stories.map((story) => {
       return (
-        <Media key={story.id} className="media-box">
-          <Media.Left align="middle" className="media-head">
-            <img src={story.image} className="story-img" alt="Story"/>
-              <div>
-               <p className="media-head"> <strong>{story.title}</strong> </p>
-               <p className="media-tag"><br/>{story.tagline}</p>
+        <div>
+          <Col s={1} m={1}/>
+          <Col s={11} m={5}>
+            <Card key={story.id} className='small horizontal hoverable'
+            header={<CardTitle image={story.image}> {story.title}</CardTitle>} >
+              <p className="tag"> {story.tagline} </p>
+              <div className="card-action grey-text">
+                <a className="story-link grey-text text-darken-2" href={`/stories/${story.id}/panels/${story.firstpanel}`}>Choose this Adventure!</a>
               </div>
-           </Media.Left>
-        </Media>
+            </Card>
+          </Col>
+          <Col s={1} m={1}/>
+
+        </div>
+
       )
     });
   }
 
   render(){
     return(
-      <div className="container">
+      <Row>
 
-          <ul className="list-group">
+
             {this.renderStories()}
-          </ul>
 
-      </div>
+
+      </Row>
     );
   }
 }
-         // <Link to="stories/new" className="btn btn-warning">
-          //   Create Story
-          // </Link>
+
 function mapStateToProps(state){
   return {stories: state.stories.stories }
 }
