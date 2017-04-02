@@ -6,7 +6,7 @@ import { Row, Col } from 'react-materialize';
 import '../../../styles/App.css';
 import { getChoices } from '../actions/index';
 import Panel from './Panel.js'
-
+import TextBox from './TextBox.js'
 
 class SingleStoryShow extends Component{
   static contextTypes = {
