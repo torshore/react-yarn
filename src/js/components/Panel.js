@@ -3,7 +3,6 @@ import '../../../styles/App.css';
 
 
 
-
 class Panel extends Component {
   render () {
     return (

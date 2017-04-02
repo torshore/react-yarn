@@ -35,7 +35,7 @@ class StoriesHome extends Component{
   render(){
     return(
       <Row>
-        {this.renderStories()}
+            {this.renderStories()}
       </Row>
     );
   }
