@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getPanel } from '../actions/index';
-import { Row, Col, CardPanel} from 'react-materialize';
+import Choices from './Choices';
+import { Row, Col } from 'react-materialize';
 import '../../../styles/App.css';
 import { getChoices } from '../actions/index';
-import Choices from './Choices.js'
 import Panel from './Panel.js'
 
 
@@ -20,21 +20,6 @@ class SingleStoryShow extends Component{
   }
 
 
-  renderPanel() {
-  return(
-    <Row>
-      <Col s={12} m={7} className='pic-size'>
-        <img src={this.props.panel.image} className="pic-size" alt="storyimage"/>
-      </Col>
-      <Col s={12} m={5} className='grid-example'>
-        <CardPanel>
-          {this.props.panel.body_text}
-        </CardPanel>
-      </Col>
-    </Row>
-  )
-  }
-
   render() {
     if(!this.props.panel) {
       return <div> Fetching your Adventure! </div>;
@@ -42,10 +27,17 @@ class SingleStoryShow extends Component{
 
     return(
       <div>
-        <Panel panel={this.props.panel}/>
-        <Choices choices={this.props.choices}
-                  panel={this.props.panel}
-        />
+      <Row>
+        <Col s={1} m={1}/>
+        <Col s={11} m={6}>
+          <Panel panel={this.props.panel} />
+        </Col>
+        <Col s={11} m={4}>
+          <TextBox panel={this.props.panel}/>
+          <Choices choices={this.props.choices} panel={this.props.panel}/>
+        </Col>
+        <Col s={1} m={1}/>
+        </Row>
       </div>
     )
   }

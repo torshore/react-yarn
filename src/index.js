@@ -8,10 +8,9 @@ import StoriesHome from './js/components/StoriesHome';
 import PanelEdit from './js/components/PanelEdit';
 import StoryChart from './js/components/StoryChart'
 import store, { history } from './store.js';
-// import '../styles/index.css';
 import 'react-materialize';
 
-// const StoreInstance = Store();
+
 const router = (
   <Provider store={store}>
    <BrowserRouter history={history}>

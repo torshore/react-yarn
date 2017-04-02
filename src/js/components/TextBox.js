@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Card} from 'react-materialize';
 
 
 
@@ -6,9 +7,9 @@ export default class TextBox extends Component {
   render() {
     return(
       <div>
-        <p>
-         {this.props.body_text}
-        </p>
+        <Card className="yellow lighten-2 black-text">
+         {this.props.panel.body_text}
+        </Card>
       </div>
     )
   }

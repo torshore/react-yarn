@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import SingleStoryShow from './SingleStoryShow.js';
+import {Collection, CollectionItem, Row} from 'react-materialize';
 
 class Choices extends React.Component {
 
@@ -10,14 +11,15 @@ class Choices extends React.Component {
       <div>
       { this.props.choices.map((choice, index) => {
         return (
+          <Row>
           <div key={choice.id}>
             <Link to={`/stories/${storyid}/panels/${choice.path_to}`} onClick={SingleStoryShow}>
-              <div className="test" >
-                <div> {choice.body_text}
-                </div>
-              </div>
+              <Collection>
+                <CollectionItem> {choice.body_text}</CollectionItem>
+              </Collection>
             </Link>
           </div>
+          </Row>
           )
       })}
       </div>

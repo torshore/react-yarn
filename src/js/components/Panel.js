@@ -6,10 +6,9 @@ import '../../../styles/App.css';
 class Panel extends Component {
   render () {
     return (
-      <img src={this.props.panel.image} alt="Story"/>
-
-
-
+    <div>
+      <img src={this.props.panel.image} className="panel-img" alt="Story"/>
+    </div>
     );
   }
 }

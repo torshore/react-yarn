@@ -4,6 +4,7 @@ import {Card, CardTitle, Row, Col} from 'react-materialize';
 import { getStories } from '../actions/index';
 
 
+
 class StoriesHome extends Component{
 
   componentDidMount() {
