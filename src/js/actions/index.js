@@ -28,15 +28,17 @@ export const getPanel = (storyid, panelid) => {
   }
 }
 
-export const getChoices = (storyid, panelid) => {
+export const getRow = (storyid) => {
   return dispatch => {
-    fetch(`/stories/${storyid}/panels/${panelid}/choices`)
+
+    fetch(`/stories/${storyid}/choices/listrow`)
       .then(response => response.json())
       .then((data) => {
         console.log(data)
-        return dispatch({type: "GET_CHOICES", payload: data.data})
+        return dispatch({type: "GET_ROW", payload: data.data})
       })
       .catch(err => console.log(err))
   }
 }
+
 

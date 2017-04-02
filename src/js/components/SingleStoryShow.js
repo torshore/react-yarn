@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getPanel } from '../actions/index';
-
 import { Row, Col, CardPanel} from 'react-materialize';
 import '../../../styles/App.css';
-
 import { getChoices } from '../actions/index';
-
+import Choices from './Choices.js'
+import Panel from './Panel.js'
 
 
 class SingleStoryShow extends Component{
@@ -25,7 +24,7 @@ class SingleStoryShow extends Component{
   return(
     <Row>
       <Col s={12} m={7} className='pic-size'>
-        <img src={this.props.panel.image} className="pic-size"/>
+        <img src={this.props.panel.image} className="pic-size" alt="storyimage"/>
       </Col>
       <Col s={12} m={5} className='grid-example'>
         <CardPanel>
