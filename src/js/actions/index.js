@@ -44,7 +44,7 @@ export const getChoices = (storyid, panelid) => {
 
 export const getRow = (storyid) => {
   return dispatch => {
-
+    console.log("dispatch2", dispatch)
     fetch(`/stories/${storyid}/choices/listrow`)
       .then(response => response.json())
       .then((data) => {
