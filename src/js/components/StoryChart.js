@@ -20,10 +20,7 @@ class StoryChart extends Component {
   }
 
    componentDidMount() {
-<<<<<<< HEAD
-=======
-    console.log('dispatch method:', this.props.dispatch);
->>>>>>> 0270e575624ca1f24e558c92de559426e47192fb
+
     this.props.dispatch(getRow(this.props.match.params.storyid));
     }
 
@@ -49,17 +46,7 @@ class StoryChart extends Component {
     return (
       <Chart
         chartType="OrgChart"
-<<<<<<< HEAD
-        rows={[
-          ['2','1'],
-          ['3','1'],
-          ['4','1']
-          ]}
-
-        //{this.columnRow(this.props.rows)}
-=======
         rows= {rowsData}
->>>>>>> 0270e575624ca1f24e558c92de559426e47192fb
         columns={[
           {
             type: 'string',
