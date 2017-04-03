@@ -13,33 +13,33 @@ class StoryChart extends Component {
 
 
    componentDidMount() {
-
+    console.log('dispatch method:', this.props.dispatch);
     this.props.dispatch(getRow(this.props.match.params.storyid));
     }
 
 
     columnRow = (dataFromDb) => {
-      dataFromDb.map((row) => {
+      console.log(dataFromDb)
+      let result = dataFromDb.map((row) => {
         var array = [];
         array.push(row.path_to.toString(), row.panel_id.toString())
         return array
-        })
+        });
+      console.log(result);
+      return result;
     }
 
 
   render() {
+    console.log('shutest', this, this.props);
+    let rowsData = this.columnRow(this.props.rows);
+    if (rowsData.length == 0) {
+      return <div />
+    }
     return (
       <Chart
         chartType="OrgChart"
-        rows={[
-          ['2','1'],
-          ['3','1'],
-          ['4','1']
-
-
-          ]}
-
-        //{this.columnRow(this.props.rows)}
+        rows= {rowsData}
         columns={[
           {
             type: 'string',
@@ -47,7 +47,7 @@ class StoryChart extends Component {
           },
           {
             type: 'string',
-            label: 'Parent',
+            label: 'Parent'
           },
       ]}
         graph_id="OrgChart"
@@ -60,7 +60,6 @@ class StoryChart extends Component {
 }
 
 function mapStateToProps(state) {
-
   return{rows: state.rows.rows};
 
 }

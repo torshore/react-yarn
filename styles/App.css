@@ -117,7 +117,10 @@ font-family: 'Josefin Sans', sans-serif;
   background-color: white;
 }
 
-
+.google-visualization-orgchart-node {
+  border: 0 !important;
+  background: yellow !important;
+}
 
 
 
