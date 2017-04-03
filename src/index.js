@@ -5,13 +5,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import App from './js/components/App';
 import SingleStoryShow from './js/components/SingleStoryShow';
 import StoriesHome from './js/components/StoriesHome';
-
 import Home from './js/components/Home';
-
 import PanelEdit from './js/components/PanelEdit';
 import StoryChart from './js/components/StoryChart'
 import NewStory from './js/components/NewStory'
-
 import store, { history } from './store.js';
 import 'react-materialize';
 

@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
 import { Chart } from 'react-google-charts';
 import { getRow } from '../actions/index';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
 
-
-
-
-
-
 class StoryChart extends Component {
-
+  constructor(props) {
+    super(props);
+    this.chartEvents = [
+    {
+      eventName: 'select',
+      callback(Chart) {
+        console.log('Selected', Chart.chart.getSelection());
+        <Link to={`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}`}></Link>
+      },
+    },
+    ]
+  }
 
    componentDidMount() {
-
     this.props.dispatch(getRow(this.props.match.params.storyid));
     }
 
@@ -35,8 +41,6 @@ class StoryChart extends Component {
           ['2','1'],
           ['3','1'],
           ['4','1']
-
-
           ]}
 
         //{this.columnRow(this.props.rows)}
@@ -54,6 +58,7 @@ class StoryChart extends Component {
         width={'50%'}
         height={'50%'}
         legend_toggle
+        chartEvents={this.chartEvents}
       />
     );
   }

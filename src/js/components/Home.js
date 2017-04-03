@@ -2,9 +2,6 @@ import React from 'react';
 import { Col, Row} from 'react-materialize';
 
 
-
-
-
 const Home = React.createClass({
   render() {
     return (
