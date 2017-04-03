@@ -1,5 +1,7 @@
 // import { GET_STORIES } from './types.js';
 import 'whatwg-fetch';
+import axios from 'axios'
+import {CREATE_STORY} from './types'
 
 
 export const getStories = () => {
@@ -52,5 +54,36 @@ export const getRow = (storyid) => {
       .catch(err => console.log(err))
   }
 }
+
+export const createStory = (props) => {
+  return dispatch => {
+
+    fetch("/stories", {
+      method: 'post',
+      type: CREATE_STORY,
+      body: props
+    })
+
+  .then(function (data) {
+    console.log('Request succeeded with JSON response', data);
+  })
+  .catch(function (error) {
+    console.log('Request failed', error);
+  });
+
+}
+
+}
+
+
+
+
+//   const request = axios.post('/stories', props);
+//   return{
+//     type: CREATE_STORY,
+//     payload: request
+//   };
+// }
+
 
 

@@ -1,47 +1,47 @@
 import React, {Component, PropTypes} from 'react';
-import {reduxForm} from 'redux-form';
+
 import {createStory} from '../actions/index';
 
-class NewStory extends Component{
-  static contextTypes = {
-    router: PropTypes.object
+
+class NewStory extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  onSubmit(props){
-    this.props.createStory(props)
-      .then(() => {
-        this.props.router.push('/');
-      });
+  handleSubmit(event) {
+    event.preventDefault()
+    var data = {story: {"title": this.title.value, "tagline": this.tagline.value, "image": this.image.value}}
+    console.log(data);
+    fetch('/stories', {
+      headers: {"Content-Type": "application/json"},
+      method: "POST",
+      body: JSON.stringify(data)
+    })
+
+
+
   }
 
-  render(){
-    const {fields:{title, tagline}, handleSubmit} = this.props;
-
-    return(
-      <div className="container">
-
-        <h1> Create a new article </h1>
-
-        <form onSubmit={handleSubmit(this.onSubmit)}>
-
-          <div className="form-group">
-            <label>Title </label>
-            <input type="text" className="form-control" {...title} />
-          </div>
-          <div className="form-group">
-            <label>Tagline </label>
-            <input type="text" className="form-control" {...tagline} />
-          </div>
-          <button type="submit" className="btn btn-success">Create</button>
-        </form>
-
-      </div>
+  render() {
+    return (
+      <form className="newstoryform" onSubmit={this.handleSubmit}>
+        <label>
+          Title:
+          <input type="text" ref={(input) => this.title = input} />
+        </label>
+        <label>
+          Tagline:
+          <input type="text" ref={(input) => this.tagline = input} />
+        </label>
+          <label>
+          Image Link for Cover:
+          <input type="text" ref={(input) => this.image = input} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
     );
   }
 }
 
-export default reduxForm({
-  form: 'NewStoryForm',
-  fields: ['title', 'tagline']
-}, null, {createStory}) (NewStory);
-
+export default NewStory
