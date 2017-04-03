@@ -3,8 +3,9 @@ const initialState = {
 }
 
 export default function(state = initialState, action) {
+  console.log('reducer', action.type, action);
   switch(action.type){
-    case "GET_ROWS":
+    case "GET_ROW":
       return {
         ...state,
         rows: action.payload
