@@ -1,15 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getPanel } from '../actions/index';
-import Panel from './Panel';
 import Choices from './Choices';
-import TextBox from './TextBox';
 import { Row, Col } from 'react-materialize';
 import '../../../styles/App.css';
-
 import { getChoices } from '../actions/index';
-
-
+import Panel from './Panel.js'
+import TextBox from './TextBox.js'
 
 class SingleStoryShow extends Component{
   static contextTypes = {
