@@ -7,7 +7,7 @@ export default class TextBox extends Component {
   render() {
     return(
       <div>
-        <Card className="yellow lighten-2 black-text">
+        <Card className="yellow lighten-2 black-text textbox">
          {this.props.panel.body_text}
         </Card>
       </div>

@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import App from './js/components/App';
 import SingleStoryShow from './js/components/SingleStoryShow';
 import StoriesHome from './js/components/StoriesHome';
+import Home from './js/components/Home';
 import store, { history } from './store.js';
 import 'react-materialize';
 
@@ -17,6 +18,7 @@ const router = (
           <Switch>
             <Route path="/stories/:storyid/panels/:panelid" component={SingleStoryShow}/>
             <Route path="/stories" component={StoriesHome} />
+            <Route path="/" component={Home}/>
           </Switch>
       </App>
    </BrowserRouter>

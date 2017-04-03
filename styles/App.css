@@ -1,18 +1,46 @@
 
 @import url("https://fonts.googleapis.com/css?family=Arvo");
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+@import url("https://fonts.googleapis.com/css?family=Josephin+Slab|Pacifico");
 
-html {
-background: url(/grey.jpg) no-repeat center center fixed;
--webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
-background-size: cover;
+
+body {
+background: transparent;
+background: url(/back.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 font-family: 'Josefin Sans', sans-serif;
 }
 
-body {
-  background: transparent;
+.title{
+  font-family: 'Pacifico', cursive;
+  color: #37474f;
+  font-size: 1000%;
+  margin: 0.8em 1.4em;
+}
+
+.btn-build {
+  margin-left: 35px;
+  margin: 10px;
+  height: 100px;
+  width: 100px;
+}
+
+.btn2 {
+  margin: 10px;
+  height: 100px;
+  width: 100px;
+}
+
+.link {
+  font-family: 'Arvo', serif;
+  color: #37474f;
+  margin: 10px;
+  font-size: 200%;
+  text-shadow: 0.5px 0.5px #37474f;
+  margin-left: 17px;
 }
 
 .nav {
@@ -38,9 +66,19 @@ body {
 }
 
 .panel-img {
-  margin: 20px;
-  height: 650px;
-  width: 450px;
+  width: 80%;
+  margin: 20px auto;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
+  border-radius: 25px;
+}
+
+.pic-size {
+  background-color: #F7CE3E;
+}
+
+.textbox {
+  font-size: 110%;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
 }
 
 /*
