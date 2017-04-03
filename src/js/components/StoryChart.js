@@ -20,23 +20,36 @@ class StoryChart extends Component {
   }
 
    componentDidMount() {
+<<<<<<< HEAD
+=======
+    console.log('dispatch method:', this.props.dispatch);
+>>>>>>> 0270e575624ca1f24e558c92de559426e47192fb
     this.props.dispatch(getRow(this.props.match.params.storyid));
     }
 
 
     columnRow = (dataFromDb) => {
-      dataFromDb.map((row) => {
+      console.log(dataFromDb)
+      let result = dataFromDb.map((row) => {
         var array = [];
         array.push(row.path_to.toString(), row.panel_id.toString())
         return array
-        })
+        });
+      console.log(result);
+      return result;
     }
 
 
   render() {
+    console.log('shutest', this, this.props);
+    let rowsData = this.columnRow(this.props.rows);
+    if (rowsData.length == 0) {
+      return <div />
+    }
     return (
       <Chart
         chartType="OrgChart"
+<<<<<<< HEAD
         rows={[
           ['2','1'],
           ['3','1'],
@@ -44,6 +57,9 @@ class StoryChart extends Component {
           ]}
 
         //{this.columnRow(this.props.rows)}
+=======
+        rows= {rowsData}
+>>>>>>> 0270e575624ca1f24e558c92de559426e47192fb
         columns={[
           {
             type: 'string',
@@ -51,7 +67,7 @@ class StoryChart extends Component {
           },
           {
             type: 'string',
-            label: 'Parent',
+            label: 'Parent'
           },
       ]}
         graph_id="OrgChart"
@@ -65,7 +81,6 @@ class StoryChart extends Component {
 }
 
 function mapStateToProps(state) {
-
   return{rows: state.rows.rows};
 
 }
