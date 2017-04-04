@@ -121,9 +121,11 @@ body {
 
 .google-visualization-orgchart-node {
   border: 0 !important;
-  background: yellow !important;
 }
 
+#panel {
+  display: none;
+}
 
 
 

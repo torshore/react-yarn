@@ -1,6 +1,9 @@
-import React, {Component, PropTypes} from 'react';
+
+import React, {Component} from 'react';
 import { Row, Col, Input, Button } from 'react-materialize';
 import {createStory} from '../actions/index';
+
+
 
 
 class NewStory extends Component {
@@ -17,8 +20,15 @@ class NewStory extends Component {
       headers: {"Content-Type": "application/json"},
       method: "POST",
       body: JSON.stringify(data)
+    }).then(response => response.json())
+    .then(json => {
+      this.setState({storyid: json.data})
+      const storyid = json.data
+      window.location.assign(`/stories/${storyid}`)
     })
   }
+
+
 
   render() {
     return (
