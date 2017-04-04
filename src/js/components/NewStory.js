@@ -17,11 +17,14 @@ class NewStory extends React.Component {
       headers: {"Content-Type": "application/json"},
       method: "POST",
       body: JSON.stringify(data)
+    }).then(response => response.json())
+    .then(json => {
+      this.setState({storyid: json.data})
+      const storyid = json.data
+      window.location.assign(`/stories/${storyid}`)
     })
+    }
 
-
-
-  }
 
   render() {
     return (
