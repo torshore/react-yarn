@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Card, CardTitle, Row, Col} from 'react-materialize';
 import { getStories } from '../actions/index';
-
+import NavBar from './NavBar';
 
 
 class StoriesHome extends Component{
@@ -14,6 +14,7 @@ class StoriesHome extends Component{
   renderStories() {
     return this.props.stories.map((story) => {
       return (
+
         <div key={story.id}>
           <Col s={1} m={1}/>
           <Col s={11} m={5}>
@@ -26,12 +27,10 @@ class StoriesHome extends Component{
             </Card>
           </Col>
           <Col s={1} m={1}/>
-
         </div>
       )
     });
   }
-
   render(){
     return(
       <Row>
@@ -40,7 +39,6 @@ class StoriesHome extends Component{
     );
   }
 }
-
 function mapStateToProps(state){
   return {stories: state.stories.stories }
 }

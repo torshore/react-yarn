@@ -3,7 +3,7 @@ import React, {Component, PropTypes} from 'react';
 import {createStory} from '../actions/index';
 
 
-class NewStory extends React.Component {
+class NewStory extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
