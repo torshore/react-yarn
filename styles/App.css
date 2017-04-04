@@ -108,6 +108,15 @@ body {
   margin-bottom: 120px;
 }
 
+.form {
+  margin: 20px;
+  font-size: 100%;
+}
+.form label {
+  font-size: 150%;
+}
+
+
 .bldtitle {
   padding: 10px;
   font-family: 'Arvo', serif;

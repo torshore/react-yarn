@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Card, CardTitle, Row, Col} from 'react-materialize';
 import { getStories } from '../actions/index';
+import NavBar from './NavBar';
 
 
 

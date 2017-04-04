@@ -40,11 +40,22 @@ class NewStory extends Component {
       </Row>
       <Row >
         <Col m={3}/>
-        <Col m={6} className="newstoryform" onSubmit={this.handleSubmit}>
-          <Input m={6} type="text" label="Title:" ref={(input) => this.title = input} />
-          <Input m={6} type="text" label="Tagline:" ref={(input) => this.tagline = input} />
-          <Input m={6} type="text" label="Image Link for Cover:" ref={(input) => this.image = input} />
-          <Button m={6} type="submit" value="Submit"> Submit </Button>
+        <Col m={6} className="newstoryform">
+          <form className="form" onSubmit={this.handleSubmit}>
+            <label>
+              Title:
+              <input type="text" ref={(input) => this.title = input} />
+            </label>
+            <label>
+              Tagline:
+              <input type="text" ref={(input) => this.tagline = input} />
+            </label>
+            <label>
+              Image Link for Cover:
+              <input type="text" ref={(input) => this.image = input} />
+            </label>
+            <input className="waves-effect waves-light btn" type="submit" value="Submit" />
+          </form>
         </Col>
         <Col m={3}/>
       </Row>
