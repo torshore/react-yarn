@@ -17,14 +17,12 @@ const router = (
   <Provider store={store}>
    <BrowserRouter history={history}>
       <App>
-          <Route exact={true} path="/" />
           <Route path="/new" component={NewStory}/>
           <Switch>
             <Route path="/stories/:storyid/panels/:panelid" component={SingleStoryShow}/>
             <Route path="/stories/:storyid/" component={StoryChart}/>
-
             <Route path="/stories" component={StoriesHome} />
-            <Route path="/" component={Home}/>
+            <Route exact={true }path="/" component={Home}/>
           </Switch>
           <Route path="/stories/:storyid/panels/:panelid/edit" component={PanelEdit}/>
       </App>

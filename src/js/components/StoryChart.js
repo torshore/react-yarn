@@ -25,7 +25,6 @@ class StoryChart extends Component {
 
 
     columnRow = (dataFromDb) => {
-      console.log(dataFromDb)
       let result = dataFromDb.map((row) => {
         var array = [];
         array.push(row.path_to.toString(), row.panel_id.toString())
@@ -37,7 +36,6 @@ class StoryChart extends Component {
 
 
   render() {
-    console.log('shutest', this, this.props);
     let rowsData = this.columnRow(this.props.rows);
     if (rowsData.length == 0) {
       return <div />
@@ -45,9 +43,7 @@ class StoryChart extends Component {
     return (
       <Chart
         chartType="OrgChart"
-
         rows= {rowsData}
-
         columns={[
           {
             type: 'string',
