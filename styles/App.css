@@ -121,6 +121,9 @@ font-family: 'Josefin Sans', sans-serif;
   border: 0 !important;
 }
 
+#panel {
+  display: none;
+}
 
 
 

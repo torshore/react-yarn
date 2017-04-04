@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 
-import {createStory} from '../actions/index';
+
 
 
 class NewStory extends Component {
