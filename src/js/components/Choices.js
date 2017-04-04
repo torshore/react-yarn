@@ -11,8 +11,8 @@ class Choices extends React.Component {
       <div>
       { this.props.choices.map((choice, index) => {
         return (
-          <Row>
-          <div key={choice.id}>
+          <Row key={choice.id}>
+          <div>
             <Link to={`/stories/${storyid}/panels/${choice.path_to}`} onClick={SingleStoryShow}>
               <Collection>
                 <CollectionItem> {choice.body_text}</CollectionItem>
