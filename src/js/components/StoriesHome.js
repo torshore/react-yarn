@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Card, CardTitle, Row, Col} from 'react-materialize';
 import { getStories } from '../actions/index';
+import NavBar from './NavBar';
+
 
 
 
@@ -15,7 +17,8 @@ class StoriesHome extends Component{
     return this.props.stories.map((story) => {
       return (
 
-        <div key={story.id}>
+
+        <div className="single-story" key={story.id}>
           <Col s={1} m={1}/>
           <Col s={11} m={5}>
             <Card  className='small horizontal hoverable'
@@ -26,16 +29,19 @@ class StoriesHome extends Component{
               </div>
             </Card>
           </Col>
-          <Col s={1} m={1}/>
+
         </div>
       )
     });
   }
   render(){
     return(
+      <div className="single-story">
+      <NavBar />
       <Row>
             {this.renderStories()}
       </Row>
+      </div>
     );
   }
 }

@@ -5,13 +5,13 @@
 
 
 body {
-background: transparent;
-background: url(/back.jpg) no-repeat center center fixed;
+ /* background: transparent;*/
+  background: url(/back.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 .title{
@@ -19,6 +19,13 @@ font-family: 'Josefin Sans', sans-serif;
   color: #37474f;
   font-size: 1000%;
   margin: 0.8em 1.4em;
+}
+
+.btn {
+  background-color: #e57373;
+}
+.btn:hover{
+  background-color: #e57373;
 }
 
 .btn-build {
@@ -44,8 +51,8 @@ font-family: 'Josefin Sans', sans-serif;
 }
 
 .nav {
-  background-color: #1A2930;
-  font-family: 'Elianto';
+  background-color: #91554D;
+  font-family: 'Pacifico', cursive;
 }
 
 .story-link {
@@ -65,11 +72,17 @@ font-family: 'Josefin Sans', sans-serif;
   object-fit: cover;
 }
 
+.single-story {
+  background: rgba(145, 85, 77, 0.75);
+  background-size: cover;
+}
+
 .panel-img {
-  width: 80%;
+  width: 100%;
+  height: 750px;
   margin: 20px auto;
-  box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
-  border-radius: 25px;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.6);
+  border: 15px solid black;
 }
 
 .pic-size {
@@ -77,35 +90,12 @@ font-family: 'Josefin Sans', sans-serif;
 }
 
 .textbox {
-  font-size: 110%;
+  margin-top: 10em;
+  font-size: 125%;
+  border: 15px solid black;
   box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
 }
 
-/*
-.media-box {
-  border: 1px solid black;
-  background-color: white;
-  font-size: 120%;
-  font-family: 'Arvo', serif;
-  width: 50%;
-  margin: 10px;
-  border-radius: 15px;
-  box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
-}*/
-
-/*.media-box:hover {
-  border: 3px solid black;
-  box-shadow: 0px 3px 15px rgba(0,0,0,0.7);
-}
-
-.media-head {
-  display: -webkit-box;
-}
-
-.media-tag {
-  font-family: 'Josefin Sans', sans-serif;
-}*/
-/*placeholder. please remove when choices are styled*/
 .test {
   background-color: white;
   border: solid;
@@ -113,8 +103,29 @@ font-family: 'Josefin Sans', sans-serif;
 }
 
 .newstoryform {
-  width: 30%;
+  width: 100%;
   background-color: white;
+  margin-bottom: 120px;
+}
+
+.form {
+  margin: 20px;
+  font-size: 100%;
+}
+.form label {
+  font-size: 150%;
+}
+
+
+.bldtitle {
+  padding: 10px;
+  font-family: 'Arvo', serif;
+  color: #ffd180;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+}
+
+.upper-div {
+  height: 10%;
 }
 
 .google-visualization-orgchart-node {
