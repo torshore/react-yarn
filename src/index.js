@@ -6,7 +6,6 @@ import App from './js/components/App';
 import SingleStoryShow from './js/components/SingleStoryShow';
 import StoriesHome from './js/components/StoriesHome';
 import Home from './js/components/Home';
-import PanelEdit from './js/components/PanelEdit';
 import StoryChart from './js/components/StoryChart'
 import NewStory from './js/components/NewStory'
 import store, { history } from './store.js';
@@ -24,7 +23,6 @@ const router = (
             <Route path="/stories" component={StoriesHome} />
             <Route exact={true }path="/" component={Home}/>
           </Switch>
-          <Route path="/stories/:storyid/panels/:panelid/edit" component={PanelEdit}/>
       </App>
    </BrowserRouter>
  </Provider>
