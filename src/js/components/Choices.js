@@ -15,7 +15,7 @@ class Choices extends React.Component {
           <div key={choice.id}>
             <Link to={`/stories/${storyid}/panels/${choice.path_to}`} onClick={SingleStoryShow}>
               <Collection>
-                <CollectionItem> {choice.body_text}</CollectionItem>
+                <CollectionItem className="grey-text text-darken-3"> {choice.body_text}</CollectionItem>
               </Collection>
             </Link>
           </div>

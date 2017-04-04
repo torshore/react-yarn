@@ -5,8 +5,9 @@ import Choices from './Choices';
 import { Row, Col } from 'react-materialize';
 import '../../../styles/App.css';
 import { getChoices } from '../actions/index';
-import Panel from './Panel.js'
-import TextBox from './TextBox.js'
+import Panel from './Panel.js';
+import TextBox from './TextBox.js';
+import NavBar from './NavBar';
 
 class SingleStoryShow extends Component{
   static contextTypes = {
@@ -26,12 +27,14 @@ class SingleStoryShow extends Component{
     }
 
     return(
-      <div>
+      <div className="single-story">
+      <NavBar />
       <Row>
-        <Col s={1} m={1}/>
+
         <Col s={11} m={6}>
           <Panel panel={this.props.panel} />
         </Col>
+        <Col m={1}/>
         <Col s={11} m={4}>
           <TextBox panel={this.props.panel}/>
           <Choices choices={this.props.choices} panel={this.props.panel}/>

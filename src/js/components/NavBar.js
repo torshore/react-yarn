@@ -1,15 +1,25 @@
 import React, {Component} from 'react';
 import '../../../styles/App.css';
-import { Navbar, NavItem } from 'react-materialize';
+import { Dropdown, NavItem, Button, Icon } from 'react-materialize';
+
 
 
 export default class NavBar extends Component {
   render() {
     return(
-      <Navbar brand='YARN' className="nav" right>
-        <NavItem href='/stories'>Play</NavItem>
-        <NavItem href='/stories/new'>Weave an Adventure!</NavItem>
-      </Navbar>
+      <div className="single-story">
+     <Dropdown
+      trigger={
+        <Button className='btn right'>Yarn<Icon right>arrow_drop_down</Icon></Button>
+        }>
+       <NavItem href="/stories">
+         Play
+       </NavItem>
+       <NavItem href="/new">
+         Build
+      </NavItem>
+    </Dropdown>
+    </div>
     )
   }
 }

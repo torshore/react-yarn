@@ -5,6 +5,7 @@ import { getStories } from '../actions/index';
 import NavBar from './NavBar';
 
 
+
 class StoriesHome extends Component{
 
   componentDidMount() {
@@ -15,8 +16,7 @@ class StoriesHome extends Component{
     return this.props.stories.map((story) => {
       return (
 
-        <div>
-
+        <div className="single-story">
           <Col s={1} m={1}/>
           <Col s={11} m={5}>
             <Card key={story.id} className='small horizontal hoverable'
@@ -27,7 +27,7 @@ class StoriesHome extends Component{
               </div>
             </Card>
           </Col>
-          <Col s={1} m={1}/>
+
 
         </div>
 
@@ -37,9 +37,12 @@ class StoriesHome extends Component{
 
   render(){
     return(
+      <div className="single-story">
+      <NavBar />
       <Row>
             {this.renderStories()}
       </Row>
+      </div>
     );
   }
 }

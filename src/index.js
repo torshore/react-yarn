@@ -18,8 +18,8 @@ const router = (
    <BrowserRouter history={history}>
       <App>
           <Route exact={true} path="/" />
-          <Route path="/new" component={NewStory}/>
           <Switch>
+            <Route path="/new" component={NewStory}/>
             <Route path="/stories/:storyid/panels/:panelid" component={SingleStoryShow}/>
             <Route path="/stories/:storyid/" component={StoryChart}/>
 

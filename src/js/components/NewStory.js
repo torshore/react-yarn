@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-
+import { Row, Col, Input, Button } from 'react-materialize';
 import {createStory} from '../actions/index';
 
 
@@ -18,28 +18,27 @@ class NewStory extends Component {
       method: "POST",
       body: JSON.stringify(data)
     })
-
-
-
   }
 
   render() {
     return (
-      <form className="newstoryform" onSubmit={this.handleSubmit}>
-        <label>
-          Title:
-          <input type="text" ref={(input) => this.title = input} />
-        </label>
-        <label>
-          Tagline:
-          <input type="text" ref={(input) => this.tagline = input} />
-        </label>
-          <label>
-          Image Link for Cover:
-          <input type="text" ref={(input) => this.image = input} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      <div className="single-story">
+      <Row>
+        <div className="upper-div">
+          <h2 className="bldtitle"> Start a New Story: </h2>
+        </div>
+      </Row>
+      <Row >
+        <Col m={3}/>
+        <Col m={6} className="newstoryform" onSubmit={this.handleSubmit}>
+          <Input m={6} type="text" label="Title:" ref={(input) => this.title = input} />
+          <Input m={6} type="text" label="Tagline:" ref={(input) => this.tagline = input} />
+          <Input m={6} type="text" label="Image Link for Cover:" ref={(input) => this.image = input} />
+          <Button m={6} type="submit" value="Submit"> Submit </Button>
+        </Col>
+        <Col m={3}/>
+      </Row>
+    </div>
     );
   }
 }
