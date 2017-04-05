@@ -12,9 +12,6 @@ class PanelEdit extends React.Component {
     this.props.dispatch(getChoices(this.props.row[6], this.props.row[1]))
   }
 
-
-
-
   render() {
     console.log("rowdata", this.props.row)
     return(
