@@ -47,6 +47,7 @@ class SingleStoryShow extends Component{
 }
 
 function mapStateToProps(state) {
+
   return{panel: state.panel.panel,
          choices: state.choices.choices};
 
