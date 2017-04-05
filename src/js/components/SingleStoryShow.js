@@ -29,7 +29,7 @@ class SingleStoryShow extends Component{
     return(
       <div className="single-story">
       <NavBar />
-      <Row>
+      <Row className="wrapper">
 
         <Col s={11} m={6}>
           <Panel panel={this.props.panel} />
