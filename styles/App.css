@@ -151,7 +151,7 @@ body {
 
 .smallPicture {
   float: left;
-  width: 100px !important;
+  width: 100px;
   border: 0px;
   top: 270px;
   right: 80%;
