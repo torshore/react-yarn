@@ -37,7 +37,7 @@ class StoryChart extends Component {
     getPanelData = (dataFromDb) => {
       let result = dataFromDb.map((row, index) => {
         var array = [];
-        array.push(row.id, row.panel_id, row.path_to, row.panel_title, row.index, row.index2, row.story_id)
+        array.push(row.id, row.panel_id, row.path_to, row.panel_title, row.index, row.index2, row.story_id, row.image, row.panel_text)
         return array
       })
       return result
@@ -47,6 +47,7 @@ class StoryChart extends Component {
   render() {
     let rowsData = this.columnRow(this.props.rows);
     let panelData = this.getPanelData(this.props.rows)
+    console.log("here", this.props.rows)
     if (rowsData.length === 0) {
       return <div />
     }
