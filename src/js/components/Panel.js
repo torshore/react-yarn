@@ -7,7 +7,9 @@ class Panel extends Component {
   render () {
     return (
     <div className="pic-div">
-      <img src={this.props.panel.image} className="panel-img" alt="Story"/>
+      <div className="frame">
+        <img src={this.props.panel.image} className="panel-img" alt="Story"/>
+      </div>
     </div>
     );
   }

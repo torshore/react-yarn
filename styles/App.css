@@ -78,11 +78,16 @@ body {
 }
 
 .panel-img {
-  width: 100%;
-  height: 750px;
+
   margin: 20px auto;
   box-shadow: 0px 3px 15px rgba(0,0,0,0.6);
   border: 15px solid black;
+  position: absolute;
+  max-width: 535px;
+  margin: auto;
+  top: 170px;
+  bottom: 200px;
+  max-height: 700px;
 }
 
 .pic-size {
@@ -136,7 +141,19 @@ body {
   display: none;
 }
 
+.row.wrapper {
+  height: 800px;
+}
 
+.frame {
+  margin-left: 50px;
+}
 
-
+.smallPicture {
+  float: left;
+  width: 100px !important;
+  border: 0px;
+  top: 270px;
+  right: 80%;
+}
 

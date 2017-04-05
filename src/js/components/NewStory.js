@@ -1,7 +1,7 @@
 
 import React, {Component} from 'react';
-import { Row, Col, Input, Button } from 'react-materialize';
-import {createStory} from '../actions/index';
+import { Row, Col, } from 'react-materialize';
+
 
 
 
