@@ -14,7 +14,7 @@ class ChoicesEdit extends React.Component {
           <Row key={choice.id}>
           <div>
            <Link to={`/stories/${storyid}/panels/${choice.path_to}/edit`} onClick={NewPanelForm}>
-              <Collection className="choices">
+              <Collection className="choice">
                 <CollectionItem className="grey-text text-darken-3 choice"> {choice.body_text}</CollectionItem>
               </Collection>
             </Link>

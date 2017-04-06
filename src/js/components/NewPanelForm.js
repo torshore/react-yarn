@@ -105,8 +105,11 @@ class NewPanelForm extends Component{
           </Col>
           <Col s={11} m={5}>
             <ChoicesEdit choices={this.props.choices} panel={this.props.panel}/>
-            <TextBox panel={this.props.panel}/>
-          </Col>
+            </Col>
+        </div>
+
+        <div className="textedit">
+        <TextBox className="textedit" panel={this.props.panel}/>
         </div>
 
 
