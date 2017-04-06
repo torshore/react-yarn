@@ -5,6 +5,7 @@
   "proxy": "http://localhost:3000/",
   "dependencies": {
     "axios": "^0.16.0",
+    "group-array": "^0.3.2",
     "react": "^15.4.2",
     "react-addons-create-fragment": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",

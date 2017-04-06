@@ -74,6 +74,18 @@ export const createStory = (props) => {
 
 }
 
+export const getPanels = (storyid) => {
+  return dispatch => {
+    fetch(`/stories/${storyid}/panels/`)
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data)
+        return dispatch({type: "GET_PANELS", payload: data.data})
+      })
+      .catch(err => console.log(err))
+  }
+}
+
 
 
 
