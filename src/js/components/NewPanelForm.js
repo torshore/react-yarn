@@ -101,6 +101,7 @@ class NewPanelForm extends Component{
           </Col>
         </div>
 
+
       <form className="form" onSubmit={this.handleChoiceSubmit}>
         <Row>
           <Col m={1}/>
@@ -116,10 +117,6 @@ class NewPanelForm extends Component{
           </Col>
         </Row>
         </form>
-
-
-
-
     <Row>
       <div className="panel-form">
         <form className="form" onSubmit={this.handleSubmit}>

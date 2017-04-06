@@ -34,7 +34,7 @@ class SingleStoryShow extends Component{
       <div className="single-story">
 
 
-        <NavBar />
+
         <ReactCSSTransitionGroup
           transitionName="example"
           transitionAppear={true}
