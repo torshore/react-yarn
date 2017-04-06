@@ -72,11 +72,33 @@ return (
           legend_toggle
           chartEvents={this.chartEvents}
         />
+
       </Col>
+
       <Col m={1}/>
+
       <div>
 
       </div>
+      </Row>
+      <Row>
+        <Col m={3}/>
+        <Col m={8}>
+              <div>
+              <br/>
+              <br/>
+              <br/>
+       <p className="instructions">
+          <span>Welcome to your new Story! </span> <br/>
+        <span>If you look up you can see a chart showing the branching paths of your adventure.</span> <br/>
+        <span>To the left is an index showing all the chapters of your story. If you click the </span> <br/>
+        <span>chapter, it'll bring you to a page where you can edit that chapter.</span> <br/>
+         <span>   In that page, just fill in the form for image and text to update that panel. </span> <br/>
+        <span>Create a new choice to make a new panel, and click that choice to go to that new panel.</span> <br/>
+          <span>Happy Yarning! </span> <br/>
+        </p>
+        </div>
+        </Col>
       </Row>
 
     </div>
