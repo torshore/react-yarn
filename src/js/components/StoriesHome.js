@@ -17,7 +17,7 @@ class StoriesHome extends Component{
     return this.props.stories.map((story) => {
       return (
         <div>
-          <NavBar/>
+
 
         <div className="single-story" key={story.id}>
           <Col s={1} m={1}/>
@@ -38,6 +38,7 @@ class StoriesHome extends Component{
   }
   render(){
     return(
+
       <div className="single-story">
       <NavBar />
       <h2 className="bldtitle"> Choose an Adventure: </h2>

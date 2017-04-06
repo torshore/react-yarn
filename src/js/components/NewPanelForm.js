@@ -102,18 +102,14 @@ class NewPanelForm extends Component{
             <ChoicesEdit choices={this.props.choices} panel={this.props.panel}/>
           </Col>
 
-            <form className="form" onSubmit={this.handleChoiceSubmit}>
+            <form className="panel-form2" onSubmit={this.handleChoiceSubmit}>
               <label>
                 New Choice:
                 <input type="text" ref={(input) => this.choiceBodyText = input} onKeyUp={this.props.addNewChoice}/>
               </label>
               <input className="waves-effect waves-light btn" type="submit" value="Submit" />
             </form>
-
-
-
-
-    <Row>
+       <Row>
       <div className="panel-form">
         <Row >
           <Col m={1}/>
