@@ -41,7 +41,7 @@ class NewPanelForm extends Component{
       body: JSON.stringify(data)
     }).then(json => {
         this.setState({panelid: json.data})
-
+        const panelid = json.data
       })
   }
 
@@ -67,18 +67,25 @@ class NewPanelForm extends Component{
   render(){
     return(
       <div>
+
         <Row>
-          <h3 className="bldpaneltitle"> Create a New Chapter:  </h3>
+          <h2 className="bldpaneltitle">
+          Create a New Chapter:
+          </h2>
         </Row>
+
+        <div className="mini-panel">
           <Col s={11} m={6}>
             <Panel panel={this.props.panel} />
           </Col>
-
           <Col s={11} m={5}>
+          <Choices choices={this.props.choices} panel={this.props.panel}/>
             <TextBox panel={this.props.panel}/>
-            <Choices choices={this.props.choices} panel={this.props.panel}/>
-          </Col>
 
+          </Col>
+        </div>
+
+        <div className="panel-form2">
             <form className="form" onSubmit={this.handleChoiceSubmit}>
               <label>
                 New Choice:
@@ -86,8 +93,7 @@ class NewPanelForm extends Component{
               </label>
               <input className="waves-effect waves-light btn" type="submit" value="Submit" />
             </form>
-
-
+        </div>
 
     <Row>
       <div className="panel-form">
