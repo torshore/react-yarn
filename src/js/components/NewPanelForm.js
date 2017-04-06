@@ -6,31 +6,29 @@ import {Row, Col} from 'react-materialize';
 
 
 export default class NewPanelForm extends Component{
-  static contextTypes = {
-    router: PropTypes.object
-  };
+   constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
   handleSubmit(event) {
     event.preventDefault()
     var data = {panel: {
+      "id": this.props.match.params.panelid,
       "title": this.title.value,
       "image": this.image.value,
       "body_text": this.body_text.value
     }};
     console.log(data);
-  }
+    fetch(`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}`, {
+      headers: {'Content-Type': 'application/json'},
+      method: "PUT",
+      body: JSON.stringify(data)
+    }).then(json => {
+        this.setState({panelid: json.data})
 
-    // fetch('/panels', {
-    //   headers: {'Content-Type': 'application/json'},
-    //   method: "POST",
-    //   body: JSON.stringify(data)
-    // }).then(response => response.json())
-    //   .then(json => {
-    //     this.setState({panelid: json.data})
-    //     const panelid = json.data
-    //     window.location.assign(`/stories/${storyid}/panels/${panelid}`)
-    //   })
-  // }
+      })
+  }
 
 
 render(){
@@ -38,21 +36,8 @@ render(){
     <div>
       <Row>
         <h3 className="bldpaneltitle"> Create a New Chapter:  </h3>
-
-       <div className="mini-panel">
-          <Row className="wrapper">
-            <Col s={11} m={6}>
-              <Panel panel={this.data.image} />
-            </Col>
-
-            <Col s={11} m={5}>
-              <TextBox panel={this.data.body_text}/>
-
-            </Col>
-            <Col s={1} m={1}/>
-          </Row>
-       </div>
       </Row>
+
 
     <Row>
       <div className="panel-form">
