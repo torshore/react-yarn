@@ -1,17 +1,14 @@
 import React from 'react';
-
-class PanelEdit extends React.Component {
-
+import {Card} from 'react-materialize';
 
 
+class PanelEdit extends React.Component{
   render() {
-    console.log(this.props.row)
     return(
-      <div>
-        <div className="smallPicture">
-          <img className="smallPicture" src={this.props.row[7]}/>
+        <div>
+          {this.props.panel.image}
+          {this.props.panel.body_text}
         </div>
-      </div>
     )
   }
 }
@@ -19,4 +16,7 @@ class PanelEdit extends React.Component {
 
 
 
-export default PanelEdit
+
+
+
+export default PanelEdit;
