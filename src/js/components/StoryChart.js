@@ -3,7 +3,7 @@ import { Chart } from 'react-google-charts';
 import { getRow } from '../actions/index';
 import { connect } from 'react-redux';
 import StoryEdit from './StoryEdit.js'
-import { Modal, Button } from 'react-materialize';
+import { Modal, Button, Col, Row } from 'react-materialize';
 
 
 
@@ -14,7 +14,6 @@ class StoryChart extends Component {
     {
       eventName: 'select',
       callback(Chart) {
-
         console.log('Selected', Chart.chart.getSelection());
       },
     },
@@ -53,6 +52,18 @@ class StoryChart extends Component {
     }
     return (
         <div>
+          <Col m={3}>
+            <h3 className="bldtitle2"> View Chapters: </h3>
+            <Modal
+             header='Chapter 1: The Beginning'
+             trigger={
+               <Button waves='light'>Chapter 1 : The Beginning</Button>
+               }>
+              <p>The Beginning </p>
+           </Modal>
+           <StoryEdit rows={panelData}/>
+          </Col>
+          <Col m={6}>
           <Chart
             chartType="OrgChart"
             rows={rowsData}
@@ -76,17 +87,7 @@ class StoryChart extends Component {
             legend_toggle
             chartEvents={this.chartEvents}
           />
-
-           <Modal
-            header='Chapter 1: The Beginning'
-            trigger={
-              <Button waves='light'>Chapter 1 : The Beginning</Button>
-              }>
-            <p>The Beginning
-            </p>
-
-          </Modal>
-          <StoryEdit rows={panelData}/>
+        </Col>
         </div>
     );
 
