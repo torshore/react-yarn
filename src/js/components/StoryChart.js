@@ -7,11 +7,9 @@ import { Modal, Button, Col, Row } from 'react-materialize';
 import { getPanels } from '../actions/index';
 import NavBar from './NavBar';
 
-
 class StoryChart extends Component {
   constructor(props) {
     super(props);
-
     this.chartEvents = [
     {
       eventName: 'select',
@@ -21,7 +19,6 @@ class StoryChart extends Component {
     },
     ]
   }
-
    componentDidMount() {
     this.props.dispatch(getRow(this.props.match.params.storyid));
     this.props.dispatch(getPanels(this.props.match.params.storyid));
@@ -35,8 +32,6 @@ class StoryChart extends Component {
     });
       return result;
   }
-
-
   render() {
     let rowsData = this.columnRow(this.props.rows);
 
@@ -56,7 +51,6 @@ return (
 
         <StoryEdit panels={this.props.panels}/>
       </Col>
-
       <Col m={8} className="chart">
         <h3 className="bldtitle3">Story Paths:</h3>
         <Chart
@@ -71,7 +65,6 @@ return (
               type: 'string',
               label: 'Parent'
             },
-
         ]}
           graph_id="OrgChart"
           width={'50%'}
@@ -87,8 +80,6 @@ return (
   );
  }
 }
-
-
 
 function mapStateToProps(state) {
   return{rows: state.rows.rows,
