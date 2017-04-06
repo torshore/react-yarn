@@ -3,6 +3,7 @@ import {Card} from 'react-materialize';
 
 
 class PanelEdit extends React.Component{
+
   render() {
     return(
         <div>
