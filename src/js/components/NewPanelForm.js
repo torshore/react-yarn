@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Panel from './Panel';
 import TextBox from './TextBox';
-// import Choices from './Choices';
+import ChoicesEdit from './ChoicesEdit';
 import {Row, Col, Button} from 'react-materialize';
 import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
@@ -99,7 +99,7 @@ class NewPanelForm extends Component{
 
           <Col s={11} m={5}>
             <TextBox panel={this.props.panel}/>
-            <Choices choices={this.props.choices} panel={this.props.panel}/>
+            <ChoicesEdit choices={this.props.choices} panel={this.props.panel}/>
           </Col>
 
             <form className="form" onSubmit={this.handleChoiceSubmit}>
