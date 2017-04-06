@@ -153,10 +153,10 @@ body {
   transform: translate(-20px);
 }
 
-.mini-panel .textbox {
-  width: 60%;
-  height: 65%;
-  transform: translate(400px, -650px);
+.textedit {
+  transform: translate(320px, -600px);
+  display: -webkit-inline-box;
+  width: 40%;
 }
 
 .mini-panel .choices {
@@ -171,6 +171,12 @@ body {
   margin-top: 10em;
   font-size: 125%;
   border: 15px solid black;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
+}
+
+.choice {
+  border: 1px solid black;
+  border-bottom: 1px solid black;
   box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
 }
 
