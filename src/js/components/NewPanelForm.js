@@ -51,6 +51,7 @@ class NewPanelForm extends Component{
       "title": this.title.value,
       "image": this.image.value,
       "body_text": this.body_text.value,
+      "story_id":this.props.match.params.storyid
     }};
     console.log(data);
     fetch(`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}`, {
@@ -88,6 +89,13 @@ class NewPanelForm extends Component{
     return(
     <div>
       <NavBar/>
+              <ReactCSSTransitionGroup
+          transitionName="example"
+          transitionAppear={true}
+          transitionAppearTimeout={500}
+          transitionEnter={true}
+          transitionEnterTimeout={600}
+          transitionLeave={false}>
 
       <div>
 
@@ -144,6 +152,7 @@ class NewPanelForm extends Component{
     </Link>
     </div>
   </div>
+  </ReactCSSTransitionGroup>
   </div>
   );
 }

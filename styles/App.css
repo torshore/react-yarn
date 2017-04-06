@@ -283,3 +283,14 @@ body {
 .smallTextbox {
   top: 100px;
 }
+
+.instructions {
+  display: block;
+  border: solid;
+  transform: translate(-0px, -550px);
+  background:white;
+  padding: 5%;
+  font-size: 16px;
+  position: relative;
+  margin-top: 25%;
+}
