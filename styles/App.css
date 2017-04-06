@@ -50,9 +50,8 @@ body {
   margin-left: 17px;
 }
 
-.nav {
-  background-color: #91554D;
-  font-family: 'Pacifico', cursive;
+.dropdown-content li>a {
+  color: #37474f;
 }
 
 .story-link {
@@ -61,15 +60,35 @@ body {
 
 .card-title {
  text-shadow: 0 1px 0 black;
+ font-size: 120%;
+
 }
 
 .tag {
-  font-size: xx-large;
+  font-size: x-large;
 }
 
 .small {
   box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
   object-fit: cover;
+}
+
+.example-appear {
+   opacity: 0.01;
+}
+
+.example-appear.example-appear-active {
+   opacity: 1;
+   transition: opacity 800ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
 }
 
 .single-story {
@@ -78,18 +97,71 @@ body {
 }
 
 .panel-img {
-
   margin: 20px auto;
   box-shadow: 0px 3px 15px rgba(0,0,0,0.6);
   border: 15px solid black;
-  position: absolute;
-  max-width: 535px;
-  margin: auto;
+  max-width: 550px;
   top: 170px;
   bottom: 200px;
   max-height: 700px;
 }
 
+.bldpaneltitle {
+  padding: 10px;
+  font-family: 'Arvo', serif;
+  color: #ffd180;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+  font-size: 150%;
+}
+
+.panel-form {
+  background-color: white;
+  width: 35%;
+  border: 5px solid black;
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+  z-index: 99;
+}
+
+.panel-form2{
+  background-color: white;
+  width: 35%;
+  position: fixed;
+  top: 10px;
+  right: 20px;
+  border: 5px solid black;
+  z-index: 99;
+}
+
+.mini-panel {
+  border: 5px solid black;
+  width: 70%;
+  height: 80%;
+  background: rgba(145, 85, 77, 0.75);
+  max-width: 535px;
+  margin: 20px;
+  top: 170px;
+  bottom: 200px;
+  max-height: 700px;
+}
+
+.mini-panel .panel-img {
+  width: 75%;
+  height: 65%;
+  transform: translate(-20px);
+}
+
+.mini-panel .textbox {
+  width: 60%;
+  height: 65%;
+  transform: translate(400px, -650px);
+}
+
+.mini-panel .choices {
+  transform: translate(0, -400px);
+  z-index: 99;
+}
 .pic-size {
   background-color: #F7CE3E;
 }
@@ -99,6 +171,15 @@ body {
   font-size: 125%;
   border: 15px solid black;
   box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
+}
+
+.grey-text.text-darken-3 {
+  font-size: large;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
+}
+.grey-text.text-darken-3:hover {
+  box-shadow: 0px 3px 15px rgba(0,0,0,1.0);
+  border: 1px solid black;
 }
 
 .test {
@@ -111,6 +192,7 @@ body {
   width: 100%;
   background-color: white;
   margin-bottom: 120px;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
 }
 
 .form {
@@ -122,6 +204,9 @@ body {
   color: #37474f;
 }
 
+#OrgChart {
+  margin: auto;
+}
 
 .bldtitle {
   padding: 10px;
@@ -130,8 +215,44 @@ body {
   text-shadow: 0 1px 0 rgba(0,0,0,0.4);
 }
 
+.bldtitle2 {
+  padding: 10px;
+  width: 70%;
+  font-family: 'Arvo', serif;
+  color: #37474f;;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+  font-size: x-large;
+  background: -webkit-gradient(linear, left top, left bottom, from(#edf7ff), to(#cde7ee));;
+  border: 2px solid black;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
+}
+
+.bldtitle3 {
+  margin: 10px auto;
+  padding: 10px;
+  font-family: 'Arvo', serif;
+  color: #37474f;;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+  font-size: x-large;
+  background: -webkit-gradient(linear, left top, left bottom, from(#edf7ff), to(#cde7ee));;
+  border: 2px solid black;
+  width: 20%;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
+}
+
 .upper-div {
   height: 10%;
+}
+
+.build {
+  height: 100vh;
+}
+
+.chart{
+  margin: 20px auto;
+  padding: 2px;
+  border: 5px solid black;
+  background: rgba(145, 85, 77, 0.75);
 }
 
 .google-visualization-orgchart-node {
@@ -158,3 +279,6 @@ body {
   right: 80%;
 }
 
+.smallTextbox {
+  top: 100px;
+}

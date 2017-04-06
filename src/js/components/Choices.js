@@ -13,9 +13,9 @@ class Choices extends React.Component {
         return (
           <Row key={choice.id}>
           <div>
-            <Link to={`/stories/${storyid}/panels/${choice.path_to}`} onClick={SingleStoryShow}>
-              <Collection>
-                <CollectionItem className="grey-text text-darken-3"> {choice.body_text}</CollectionItem>
+           <Link to={`/stories/${storyid}/panels/${choice.path_to}`} onClick={SingleStoryShow}>
+              <Collection className="choices">
+                <CollectionItem className="grey-text text-darken-3 choice"> {choice.body_text}</CollectionItem>
               </Collection>
             </Link>
           </div>
