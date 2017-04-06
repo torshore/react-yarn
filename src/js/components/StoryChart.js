@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import StoryEdit from './StoryEdit.js';
 import { Modal, Button, Row, Col } from 'react-materialize';
 import { getPanels } from '../actions/index';
+import NavBar from './NavBar';
 
 class StoryChart extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class StoryChart extends Component {
   columnRow = (dataFromDb) => {
     let result = dataFromDb.map((row, index) => {
       var array = [];
-        array.push(row.index2.toString(), row.index.toString(), row.panel_title.toString())
+        array.push(row.index2.toString(), row.index.toString())
         return array
     });
       return result;
@@ -35,16 +36,14 @@ class StoryChart extends Component {
 
 return (
   <div>
+    <div>
+       <NavBar/>
+    </div>
+  <div>
     <Row className="build">
       <Col m={3}>
         <h3 className="bldtitle2"> View Chapters: </h3>
-        <Modal
-          header='Chapter 1: The Beginning'
-          trigger={
-            <Button waves='light'>Chapter 1 : The Beginning</Button>
-          }>
-          <p>The Beginning</p>
-        </Modal>
+
         <StoryEdit panels={this.props.panels}/>
       </Col>
 
@@ -62,10 +61,7 @@ return (
               type: 'string',
               label: 'Parent'
             },
-            {
-              type: 'string',
-              label: 'Tooltip'
-            }
+
         ]}
           graph_id="OrgChart"
           width={'50%'}
@@ -76,6 +72,7 @@ return (
       </Col>
       <Col m={1}/>
       </Row>
+    </div>
     </div>
   );
  }
