@@ -11,7 +11,7 @@ class StoryEdit extends Component {
       return (
         <div key={i}>
           <Link to={`/stories/${panel.story_id}/panels/${panel.id}/edit`} onClick={NewPanelForm}>
-              <Button>{panel.index}</Button>
+              <Button>Chapter {panel.index}</Button>
           </Link>
         </div>
       )
