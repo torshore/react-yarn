@@ -1,23 +1,30 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'react-materialize';
 import PanelEdit from './PanelEdit.js'
-
+import { Link } from 'react-router-dom'
 
 
 class StoryEdit extends Component {
-  renderRows() {
-    return this.props.rows.map((row, index) => {
-      // console.log('this is row', row)
+
+
+
+
+  renderPanels() {
+
+    return this.props.panels.map((panel, i) => {
       return (
-        <div key={index}>
+        <div key={i}>
           <Modal
-            header={`Chapter ${row[2]} : ${row[3]}`}
+            header={`Chapter ${panel.id} : ${panel.panel_title}`}
 
             trigger={
-              <Button waves='light'>{`Chapter ${row[5]} : ${row[3]}`}</Button>
+              <Button waves='light'>{`Chapter ${panel.id} : ${panel.panel_title}/choices/edit`}</Button>
               }>
               <div>
-                <PanelEdit row={row}/>
+                <Link to={`/stories/${panel.storyid}/panels/${panel.id}`} onClick={NewPanelForm}>
+                <Button/>
+                </Link>
+                <PanelEdit panel={panel}/>
               </div>
 
           </Modal>
@@ -28,7 +35,7 @@ class StoryEdit extends Component {
   render () {
     return(
       <div>
-        {this.renderRows()}
+        {this.renderPanels()}
       </div>
       )
   }

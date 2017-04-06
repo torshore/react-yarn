@@ -4,26 +4,22 @@ import { getRow } from '../actions/index';
 import { connect } from 'react-redux';
 import StoryEdit from './StoryEdit.js'
 import { Modal, Button } from 'react-materialize';
-
-
+import { getPanels } from '../actions/index';
 
 class StoryChart extends Component {
   constructor(props) {
     super(props);
-    this.chartEvents = [
-    {
-      eventName: 'select',
-      callback(Chart) {
 
-        console.log('Selected', Chart.chart.getSelection());
-      },
-    },
-    ]
-  }
+    }
+
+
 
    componentDidMount() {
     this.props.dispatch(getRow(this.props.match.params.storyid));
+    this.props.dispatch(getPanels(this.props.match.params.storyid));
+
     }
+
 
     columnRow = (dataFromDb) => {
       let result = dataFromDb.map((row, index) => {
@@ -34,20 +30,11 @@ class StoryChart extends Component {
       return result;
     }
 
-    getPanelData = (dataFromDb) => {
-      let result = dataFromDb.map((row, index) => {
-        var array = [];
-        array.push(row.id, row.panel_id, row.path_to, row.panel_title, row.index, row.index2, row.story_id, row.image, row.panel_text)
-        return array
-      })
-      return result
-    }
 
 
   render() {
     let rowsData = this.columnRow(this.props.rows);
-    let panelData = this.getPanelData(this.props.rows)
-    console.log("here", this.props.rows)
+
     if (rowsData.length === 0) {
       return <div />
     }
@@ -77,16 +64,10 @@ class StoryChart extends Component {
             chartEvents={this.chartEvents}
           />
 
-           <Modal
-            header='Chapter 1: The Beginning'
-            trigger={
-              <Button waves='light'>Chapter 1 : The Beginning</Button>
-              }>
-            <p>The Beginning
-            </p>
 
-          </Modal>
-          <StoryEdit rows={panelData}/>
+          <StoryEdit panels={this.props.panels}/>
+
+
         </div>
     );
 
@@ -99,7 +80,8 @@ class StoryChart extends Component {
 
 
 function mapStateToProps(state) {
-  return{rows: state.rows.rows};
+  return{rows: state.rows.rows,
+        panels: state.panels.panels}
 
 }
 
