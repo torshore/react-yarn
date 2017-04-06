@@ -9,7 +9,6 @@ import Home from './js/components/Home';
 import StoryChart from './js/components/StoryChart'
 import NewStory from './js/components/NewStory'
 import NewPanelForm from './js/components/NewPanelForm';
-import PanelEdit from './js/components/PanelEdit'
 import store, { history } from './store.js';
 import 'react-materialize';
 
