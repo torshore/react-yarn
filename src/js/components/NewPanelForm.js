@@ -2,13 +2,15 @@ import React, { Component, PropTypes } from 'react';
 import Panel from './Panel';
 import TextBox from './TextBox';
 // import Choices from './Choices';
-import {Row, Col} from 'react-materialize';
+import {Row, Col, Button} from 'react-materialize';
 import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { getPanel } from '../actions/index';
 import Choices from './Choices';
 import { getChoices } from '../actions/index';
 import NavBar from './NavBar';
+import { Link } from 'react-router-dom';
+import StoryChart from './StoryChart';
 
 
 class NewPanelForm extends Component{
@@ -18,7 +20,21 @@ class NewPanelForm extends Component{
    constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      newChoices: []
+    };
   }
+    addNewChoice = (event) => {
+      if (event.key === "Enter") {
+
+        const newChoice = {
+          content: event.target.value};
+          event.target.value = ""
+          this.setState ({newChoices : event.target.value})
+        }
+      }
+
+
 
     componentDidMount() {
 
@@ -34,7 +50,7 @@ class NewPanelForm extends Component{
 
       "title": this.title.value,
       "image": this.image.value,
-      "body_text": this.body_text.value
+      "body_text": this.body_text.value,
     }};
     console.log(data);
     fetch(`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}`, {
@@ -43,7 +59,7 @@ class NewPanelForm extends Component{
       body: JSON.stringify(data)
     }).then(json => {
         this.setState({panelid: json.data})
-        const panelid = json.data
+        window.location.assign(`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}/edit`)
       })
   }
 
@@ -53,6 +69,7 @@ class NewPanelForm extends Component{
       "panel_id": this.props.match.params.panelid,
       "body_text": this.choiceBodyText.value,
       "story_id": this.props.match.params.storyid,
+      "index": this.props.panel.index
 
     }};
     console.log(data);
@@ -63,39 +80,37 @@ class NewPanelForm extends Component{
     }).then(json => {
         this.setState({choiceid: json.data})
         const choiceid = json.data
+        window.location.assign(`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}/edit`)
       })
   }
 
   render(){
     return(
+    <div>
+      <NavBar/>
+
       <div>
-
         <Row>
-          <h2 className="bldpaneltitle">
-          Create a New Chapter:
-          </h2>
+          <h3 className="bldpaneltitle"> Create a New Chapter:  </h3>
         </Row>
-
-        <div className="mini-panel">
           <Col s={11} m={6}>
             <Panel panel={this.props.panel} />
           </Col>
+
           <Col s={11} m={5}>
-          <Choices choices={this.props.choices} panel={this.props.panel}/>
             <TextBox panel={this.props.panel}/>
-
+            <Choices choices={this.props.choices} panel={this.props.panel}/>
           </Col>
-        </div>
 
-        <div className="panel-form2">
             <form className="form" onSubmit={this.handleChoiceSubmit}>
               <label>
                 New Choice:
-                <input type="text" ref={(input) => this.choiceBodyText = input} />
+                <input type="text" ref={(input) => this.choiceBodyText = input} onKeyUp={this.props.addNewChoice}/>
               </label>
               <input className="waves-effect waves-light btn" type="submit" value="Submit" />
             </form>
-        </div>
+
+
 
 
     <Row>
@@ -123,6 +138,12 @@ class NewPanelForm extends Component{
         </Row>
       </div>
     </Row>
+    <div>
+     <Link to={`/stories/${this.props.panel.story_id}/`} onClick={StoryChart }>
+      <Button>Back to the Chart!</Button>
+    </Link>
+    </div>
+  </div>
   </div>
   );
 }

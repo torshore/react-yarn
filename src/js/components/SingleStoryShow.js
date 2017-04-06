@@ -28,6 +28,9 @@ class SingleStoryShow extends Component{
     }
 
     return(
+      <div>
+        <NavBar/>
+
       <div className="single-story">
 
 
@@ -54,6 +57,7 @@ class SingleStoryShow extends Component{
 
         </ReactCSSTransitionGroup>
 
+      </div>
       </div>
     )
   }

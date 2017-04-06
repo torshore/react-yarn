@@ -16,6 +16,8 @@ class StoriesHome extends Component{
   renderStories() {
     return this.props.stories.map((story) => {
       return (
+        <div>
+          <NavBar/>
 
         <div className="single-story" key={story.id}>
           <Col s={1} m={1}/>
@@ -29,6 +31,7 @@ class StoriesHome extends Component{
             </Card>
           </Col>
 
+        </div>
         </div>
       )
     });
