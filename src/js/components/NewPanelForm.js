@@ -57,7 +57,7 @@ class NewPanelForm extends Component{
       body: JSON.stringify(data)
     }).then(json => {
         this.setState({panelid: json.data})
-        const panelid = json.data
+        window.location.assign(`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}/edit`)
       })
   }
 
@@ -78,6 +78,7 @@ class NewPanelForm extends Component{
     }).then(json => {
         this.setState({choiceid: json.data})
         const choiceid = json.data
+        window.location.assign(`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}/edit`)
       })
   }
 
@@ -87,25 +88,18 @@ class NewPanelForm extends Component{
       <NavBar/>
 
       <div>
-
         <Row>
-          <h2 className="bldpaneltitle">
-          Create a New Chapter:
-          </h2>
+          <h3 className="bldpaneltitle"> Create a New Chapter:  </h3>
         </Row>
-
-        <div className="mini-panel">
           <Col s={11} m={6}>
             <Panel panel={this.props.panel} />
           </Col>
+
           <Col s={11} m={5}>
-          <Choices choices={this.props.choices} panel={this.props.panel}/>
             <TextBox panel={this.props.panel}/>
-
+            <Choices choices={this.props.choices} panel={this.props.panel}/>
           </Col>
-        </div>
 
-        <div className="panel-form2">
             <form className="form" onSubmit={this.handleChoiceSubmit}>
               <label>
                 New Choice:
@@ -113,7 +107,8 @@ class NewPanelForm extends Component{
               </label>
               <input className="waves-effect waves-light btn" type="submit" value="Submit" />
             </form>
-        </div>
+
+
 
     <Row>
       <div className="panel-form">
