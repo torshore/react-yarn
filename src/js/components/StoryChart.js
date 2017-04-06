@@ -21,8 +21,6 @@ class StoryChart extends Component {
     },
     ]
   }
-  }
-
 
    componentDidMount() {
     this.props.dispatch(getRow(this.props.match.params.storyid));
