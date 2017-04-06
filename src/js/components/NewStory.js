@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import {createStory} from '../actions/index';
 import { Row, Col } from 'react-materialize';
+import NavBar from './NavBar';
 
 
 
@@ -29,6 +30,8 @@ class NewStory extends Component {
 
   render() {
     return (
+    <div>
+      <NavBar/>
       <div className="single-story">
       <Row>
         <div className="upper-div">
@@ -56,6 +59,7 @@ class NewStory extends Component {
         </Col>
         <Col m={3}/>
       </Row>
+    </div>
     </div>
     );
   }

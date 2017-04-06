@@ -10,8 +10,8 @@ class StoryEdit extends Component {
     return this.props.panels.map((panel, i) => {
       return (
         <div key={i}>
-          <Link to={`/stories/${panel.story_id}/panels/${panel.id}/choices/edit`} onClick={NewPanelForm}>
-              <Button>{panel.title}</Button>
+          <Link to={`/stories/${panel.story_id}/panels/${panel.id}/edit`} onClick={NewPanelForm}>
+              <Button>{panel.index}</Button>
           </Link>
         </div>
       )

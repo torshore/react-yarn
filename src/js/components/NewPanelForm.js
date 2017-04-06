@@ -2,13 +2,15 @@ import React, { Component, PropTypes } from 'react';
 import Panel from './Panel';
 import TextBox from './TextBox';
 // import Choices from './Choices';
-import {Row, Col} from 'react-materialize';
+import {Row, Col, Button} from 'react-materialize';
 import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { getPanel } from '../actions/index';
 import Choices from './Choices';
 import { getChoices } from '../actions/index';
 import NavBar from './NavBar';
+import { Link } from 'react-router-dom';
+import StoryChart from './StoryChart';
 
 
 class NewPanelForm extends Component{
@@ -18,7 +20,21 @@ class NewPanelForm extends Component{
    constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      newChoices: []
+    };
   }
+    addNewChoice = (event) => {
+      if (event.key === "Enter") {
+
+        const newChoice = {
+          content: event.target.value};
+          event.target.value = ""
+          this.setState ({newChoices : event.target.value})
+        }
+      }
+
+
 
     componentDidMount() {
 
@@ -32,7 +48,7 @@ class NewPanelForm extends Component{
       "id": this.props.match.params.panelid,
       "title": this.title.value,
       "image": this.image.value,
-      "body_text": this.body_text.value
+      "body_text": this.body_text.value,
     }};
     console.log(data);
     fetch(`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}`, {
@@ -51,6 +67,7 @@ class NewPanelForm extends Component{
       "panel_id": this.props.match.params.panelid,
       "body_text": this.choiceBodyText.value,
       "story_id": this.props.match.params.storyid,
+      "index": this.props.panel.index
 
     }};
     console.log(data);
@@ -66,6 +83,9 @@ class NewPanelForm extends Component{
 
   render(){
     return(
+    <div>
+      <NavBar/>
+
       <div>
 
         <Row>
@@ -89,7 +109,7 @@ class NewPanelForm extends Component{
             <form className="form" onSubmit={this.handleChoiceSubmit}>
               <label>
                 New Choice:
-                <input type="text" ref={(input) => this.choiceBodyText = input} />
+                <input type="text" ref={(input) => this.choiceBodyText = input} onKeyUp={this.props.addNewChoice}/>
               </label>
               <input className="waves-effect waves-light btn" type="submit" value="Submit" />
             </form>
@@ -120,6 +140,12 @@ class NewPanelForm extends Component{
         </Row>
       </div>
     </Row>
+    <div>
+     <Link to={`/stories/${this.props.panel.story_id}/`} onClick={StoryChart }>
+      <Button>Back to the Chart!</Button>
+    </Link>
+    </div>
+  </div>
   </div>
   );
 }
