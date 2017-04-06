@@ -90,34 +90,39 @@ class NewPanelForm extends Component{
       <NavBar/>
 
       <div>
-        <Row>
-          <h3 className="bldpaneltitle"> Create a New Chapter:  </h3>
-        </Row>
+
+        <div className="mini-panel">
           <Col s={11} m={6}>
             <Panel panel={this.props.panel} />
           </Col>
-
           <Col s={11} m={5}>
-            <TextBox panel={this.props.panel}/>
             <ChoicesEdit choices={this.props.choices} panel={this.props.panel}/>
+            <TextBox panel={this.props.panel}/>
           </Col>
+        </div>
 
-            <form className="panel-form2" onSubmit={this.handleChoiceSubmit}>
-              <label>
-                New Choice:
-                <input type="text" ref={(input) => this.choiceBodyText = input} onKeyUp={this.props.addNewChoice}/>
-              </label>
-              <input className="waves-effect waves-light btn" type="submit" value="Submit" />
-            </form>
-       <Row>
-      <div className="panel-form">
-        <Row >
+
+      <form className="form" onSubmit={this.handleChoiceSubmit}>
+        <Row>
           <Col m={1}/>
           <Col m={10}>
-            <form className="form" onSubmit={this.handleSubmit}>
-              <label>
-                Title:
-                <input type="text" ref={(input) => this.title = input} />
+          <div className="panel-form2">
+
+            <label>
+              New Choice:
+              <input type="text" ref={(input) => this.choiceBodyText = input} onKeyUp={this.props.addNewChoice}/>
+            </label>
+            <input className="waves-effect waves-light btn" type="submit" value="Submit" />
+            </div>
+          </Col>
+        </Row>
+        </form>
+    <Row>
+      <div className="panel-form">
+        <form className="form" onSubmit={this.handleSubmit}>
+          <label>
+            Title:
+              <input type="text" ref={(input) => this.title = input} />
               </label>
               <label>
                 Chapter Text:
@@ -129,9 +134,8 @@ class NewPanelForm extends Component{
               </label>
               <input className="waves-effect waves-light btn" type="submit" value="Submit" />
             </form>
-          </Col>
+
           <Col m={1}/>
-        </Row>
       </div>
     </Row>
     <div>
