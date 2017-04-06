@@ -8,6 +8,7 @@ import StoriesHome from './js/components/StoriesHome';
 import Home from './js/components/Home';
 import StoryChart from './js/components/StoryChart'
 import NewStory from './js/components/NewStory'
+import NewPanelForm from './js/components/NewPanelForm';
 import store, { history } from './store.js';
 import 'react-materialize';
 
@@ -16,16 +17,15 @@ const router = (
   <Provider store={store}>
    <BrowserRouter history={history}>
       <App>
-
-          <Route exact={true} path="/" />
-
-          <Switch>
-            <Route path="/new" component={NewStory}/>
-            <Route path="/stories/:storyid/panels/:panelid" component={SingleStoryShow}/>
-            <Route path="/stories/:storyid/" component={StoryChart}/>
-            <Route path="/stories" component={StoriesHome} />
-            <Route exact={true }path="/" component={Home}/>
-          </Switch>
+        <Route exact={true} path="/" />
+        <Switch>
+          <Route path="/stories/:storyid/panels/:panelid/choices/edit" component={NewPanelForm}/>
+          <Route path="/new" component={NewStory}/>
+          <Route path="/stories/:storyid/panels/:panelid" component={SingleStoryShow}/>
+          <Route path="/stories/:storyid/" component={StoryChart}/>
+          <Route path="/stories" component={StoriesHome} />
+          <Route exact={true }path="/" component={Home}/>
+        </Switch>
       </App>
    </BrowserRouter>
  </Provider>

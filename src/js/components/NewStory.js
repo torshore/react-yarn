@@ -1,9 +1,6 @@
-
 import React, {Component} from 'react';
-import { Row, Col, Input, Button } from 'react-materialize';
 import {createStory} from '../actions/index';
-
-
+import { Row, Col, } from 'react-materialize';
 
 
 class NewStory extends Component {
@@ -27,8 +24,6 @@ class NewStory extends Component {
       window.location.assign(`/stories/${storyid}`)
     })
   }
-
-
 
   render() {
     return (

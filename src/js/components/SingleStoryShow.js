@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { getPanel } from '../actions/index';
 import Choices from './Choices';
 import { Row, Col } from 'react-materialize';
@@ -28,19 +29,30 @@ class SingleStoryShow extends Component{
 
     return(
       <div className="single-story">
-      <NavBar />
-      <Row>
 
-        <Col s={11} m={6}>
-          <Panel panel={this.props.panel} />
-        </Col>
-        <Col m={1}/>
-        <Col s={11} m={4}>
-          <TextBox panel={this.props.panel}/>
-          <Choices choices={this.props.choices} panel={this.props.panel}/>
-        </Col>
-        <Col s={1} m={1}/>
-        </Row>
+        <NavBar />
+        <ReactCSSTransitionGroup
+          transitionName="example"
+          transitionAppear={true}
+          transitionAppearTimeout={500}
+          transitionEnter={true}
+          transitionEnterTimeout={600}
+          transitionLeave={false}>
+
+          <Row className="wrapper">
+            <Col s={11} m={6}>
+              <Panel panel={this.props.panel} />
+            </Col>
+
+            <Col s={11} m={5}>
+              <TextBox panel={this.props.panel}/>
+              <Choices choices={this.props.choices} panel={this.props.panel}/>
+            </Col>
+            <Col s={1} m={1}/>
+          </Row>
+
+        </ReactCSSTransitionGroup>
+>>>>>>> Stashed changes
       </div>
     )
   }
