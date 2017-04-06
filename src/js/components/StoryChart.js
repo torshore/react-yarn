@@ -4,7 +4,15 @@ import { getRow } from '../actions/index';
 import { connect } from 'react-redux';
 import StoryEdit from './StoryEdit.js'
 import { Modal, Button } from 'react-materialize';
+
+
+import { Modal, Button, Row, Col } from 'react-materialize';
+
+
+
+
 import { getPanels } from '../actions/index';
+
 
 class StoryChart extends Component {
   constructor(props) {
@@ -39,36 +47,69 @@ class StoryChart extends Component {
       return <div />
     }
     return (
+        <StoryEdit rows={rowsData}/>
+      </div>
         <div>
-          <Chart
-            chartType="OrgChart"
-            rows={rowsData}
-            columns={[
-              {
-                type: 'string',
-                label: 'Child',
-              },
-              {
-                type: 'string',
-                label: 'Parent'
-              },
-              {
-                type: 'string',
-                label: 'Tooltip'
-              }
-          ]}
-            graph_id="OrgChart"
-            width={'50%'}
-            height={'50%'}
-            legend_toggle
-            chartEvents={this.chartEvents}
-          />
+        <Row className="build">
+        <div >
+         <Col m={3}>
+           <h3 className="bldtitle2"> View Chapters: </h3>
+           <Modal
+            header='Chapter 1: The Beginning'
+            trigger={
+              <Button waves='light'>Chapter 1 : The Beginning</Button>
+              }>
+            <p>The Beginning
+            </p>
 
-
-          <StoryEdit panels={this.props.panels}/>
-
-
+          </Modal>
+          <StoryEdit rows={panelData}/>
+          </Col>
+          </div>
+        <div>
+          <Col m={8} className="chart">
+            <h3 className="bldtitle3">Story Paths:</h3>
+            <div>
+              <Chart
+                chartType="OrgChart"
+                rows={rowsData}
+                columns={[
+                  {
+                    type: 'string',
+                    label: 'Child',
+                  },
+                  {
+                    type: 'string',
+                    label: 'Parent'
+                  },
+                  {
+                    type: 'string',
+                    label: 'Tooltip'
+                  }
+              ]}
+                graph_id="OrgChart"
+                width={'50%'}
+                height={'50%'}
+                legend_toggle
+                chartEvents={this.chartEvents}
+              />
+          </Col>
+          <Col m={0.5}/>
         </div>
+        </Row>
+  
+           <Modal
+            header='Chapter 1: The Beginning'
+            trigger={
+              <Button waves='light'>Chapter 1 : The Beginning</Button>
+              }>
+            <p>The Beginning
+            </p>
+
+          </Modal>
+  
+        </div>
+
     );
 
 
