@@ -9,7 +9,22 @@ import { getPanels } from '../actions/index';
 class StoryChart extends Component {
   constructor(props) {
     super(props);
+<<<<<<< Updated upstream
     }
+=======
+
+    this.chartEvents = [
+    {
+      eventName: 'select',
+      callback(Chart) {
+        console.log('Selected', Chart.chart.getSelection());
+      },
+    },
+    ]
+  }
+
+
+>>>>>>> Stashed changes
 
    componentDidMount() {
     this.props.dispatch(getRow(this.props.match.params.storyid));
