@@ -19,7 +19,7 @@ const router = (
       <App>
         <Route exact={true} path="/" />
         <Switch>
-          <Route path="/stories/:storyid/panels/:panelid/choices/edit" component={NewPanelForm}/>
+          <Route path="/stories/:storyid/panels/:panelid/edit" component={NewPanelForm}/>
           <Route path="/new" component={NewStory}/>
           <Route path="/stories/:storyid/panels/:panelid" component={SingleStoryShow}/>
           <Route path="/stories/:storyid/" component={StoryChart}/>
