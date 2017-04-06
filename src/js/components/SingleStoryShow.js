@@ -30,6 +30,7 @@ class SingleStoryShow extends Component{
     return(
       <div className="single-story">
 
+
         <NavBar />
         <ReactCSSTransitionGroup
           transitionName="example"
@@ -52,13 +53,14 @@ class SingleStoryShow extends Component{
           </Row>
 
         </ReactCSSTransitionGroup>
->>>>>>> Stashed changes
+
       </div>
     )
   }
 }
 
 function mapStateToProps(state) {
+
   return{panel: state.panel.panel,
          choices: state.choices.choices};
 

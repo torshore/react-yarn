@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+
 import {createStory} from '../actions/index';
-import { Row, Col, } from 'react-materialize';
+import { Row, Col } from 'react-materialize';
+
 
 
 class NewStory extends Component {

@@ -101,6 +101,7 @@ body {
   margin: 20px auto;
   box-shadow: 0px 3px 15px rgba(0,0,0,0.6);
   border: 15px solid black;
+
   max-width: 550px;
   top: 170px;
   bottom: 200px;
@@ -131,6 +132,14 @@ body {
   width: 70%;
   height: 80%;
   background-color: white;
+
+  position: absolute;
+  max-width: 535px;
+  margin: auto;
+  top: 170px;
+  bottom: 200px;
+  max-height: 700px;
+
 }
 
 .pic-size {
@@ -234,7 +243,19 @@ body {
   display: none;
 }
 
+.row.wrapper {
+  height: 800px;
+}
 
+.frame {
+  margin-left: 50px;
+}
 
-
+.smallPicture {
+  float: left;
+  width: 100px;
+  border: 0px;
+  top: 270px;
+  right: 80%;
+}
 
