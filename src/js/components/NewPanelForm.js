@@ -6,7 +6,6 @@ import {Row, Col, Button} from 'react-materialize';
 import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { getPanel } from '../actions/index';
-import Choices from './Choices';
 import { getChoices } from '../actions/index';
 import NavBar from './NavBar';
 import { Link } from 'react-router-dom';

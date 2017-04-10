@@ -3,7 +3,7 @@ import { Chart } from 'react-google-charts';
 import { getRow } from '../actions/index';
 import { connect } from 'react-redux';
 import StoryEdit from './StoryEdit.js'
-import { Modal, Button, Col, Row } from 'react-materialize';
+import { Col, Row } from 'react-materialize';
 import { getPanels } from '../actions/index';
 import NavBar from './NavBar';
 
