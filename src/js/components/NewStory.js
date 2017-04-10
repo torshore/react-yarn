@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-
-import {createStory} from '../actions/index';
 import { Row, Col } from 'react-materialize';
 import NavBar from './NavBar';
 
