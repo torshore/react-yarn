@@ -1,6 +1,6 @@
 README
 
-Yarn is a Choose Your Own Adventure Builder/Player
+Yarn is a Choose Your Own Adventure Builder/Player.
 
 Built for Lighthouse Labs Final Project.
 
