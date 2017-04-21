@@ -6,7 +6,7 @@ import {Collection, CollectionItem, Row} from 'react-materialize';
 class ChoicesEdit extends React.Component {
 
   render(){
-    const storyid = this.props.panel.story_id
+    const storyid = this.props.story_id
     return (
       <div>
       { this.props.choices.map((choice, index) => {

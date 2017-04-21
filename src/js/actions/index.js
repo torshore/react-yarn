@@ -80,6 +80,7 @@ export const getPanels = (storyid) => {
       .then(response => response.json())
       .then((data) => {
         console.log(data)
+
         return dispatch({type: "GET_PANELS", payload: data.data})
       })
       .catch(err => console.log(err))
@@ -87,14 +88,6 @@ export const getPanels = (storyid) => {
 }
 
 
-
-
-//   const request = axios.post('/stories', props);
-//   return{
-//     type: CREATE_STORY,
-//     payload: request
-//   };
-// }
 
 
 

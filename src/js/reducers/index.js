@@ -14,7 +14,7 @@ const allReducers = combineReducers({
   form: formReducer,
   choices: ChoicesReducer,
   rows: RowsReducer,
-  panels: PanelsReducer
+  panels: PanelsReducer,
 });
 
 export default allReducers;
