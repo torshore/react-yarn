@@ -22,13 +22,16 @@ class NewPanelForm extends Component{
     this.handleBodyTextChange = this.handleBodyTextChange.bind(this)
     this.handleImageChange = this.handleImageChange.bind(this)
     this.handleBodyTextSubmit = this.handleBodyTextSubmit.bind(this)
+    this.handleChoiceSubmit = this.handleChoiceSubmit.bind(this)
+    this.handleChoiceBodyTextChange = this.handleChoiceBodyTextChange.bind(this)
 
     this.state = {
       choices: [],
       body_text: "",
       panel_id: "",
       story_id: "",
-      image: ""
+      image: "",
+      new_choice_body_text: ""
     };
   }
 
@@ -85,24 +88,24 @@ class NewPanelForm extends Component{
           this.setState({panelid: json.data})
         })
     }
-
    handleChoiceSubmit = (event) => {
     event.preventDefault()
     var data = {choice: {
-      "panel_id": this.props.match.params.panelid,
-      "body_text": this.choiceBodyText.value,
-      "story_id": this.props.match.params.storyid,
+      "panel_id": this.state.panel_id,
+      "body_text": this.state.new_choice_body_text,
+      "story_id": this.state.story_id,
       "index": this.props.panel.index
 
     }};
     console.log(data);
-    fetch(`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}/choices`, {
+    fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}/choices`, {
       headers: {'Content-Type': 'application/json'},
       method: "POST",
       body: JSON.stringify(data)
     }).then(json => {
-        this.setState({choiceid: json.data})
-        window.location.assign(`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}/edit`)
+      console.log('choices', data)
+        this.setState({new_choice_body_text: ""})
+        this.getChoices()
       })
   }
 
@@ -111,6 +114,9 @@ class NewPanelForm extends Component{
     }
     handleImageChange(event) {
       this.setState({image: event.target.value});
+    }
+    handleChoiceBodyTextChange(event) {
+      this.setState({new_choice_body_text: event.target.value})
     }
 
     handleBodyTextSubmit(event) {
@@ -162,7 +168,7 @@ class NewPanelForm extends Component{
 
                 <label>
                   New Choice:
-                  <input type="text" ref={(input) => this.choiceBodyText = input} onKeyUp={this.props.addNewChoice}/>
+                  <input type="text" value={this.state.new_choice_body_text} onChange={this.handleChoiceBodyTextChange}/>
                 </label>
                 <input className="waves-effect waves-light btn" type="submit" value="Submit" />
               </div>
