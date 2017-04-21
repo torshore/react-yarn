@@ -11,7 +11,7 @@ class ChoicesEdit extends React.Component {
       <div>
       { this.props.choices.map((choice, index) => {
         return (
-          <Row key={choice.id}>
+          <Row key={index}>
           <div>
            <Link to={`/stories/${storyid}/panels/${choice.path_to}/edit`} onClick={NewPanelForm}>
               <Collection className="choice">
