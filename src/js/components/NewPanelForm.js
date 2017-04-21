@@ -1,15 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import Panel from './Panel';
-import TextEdit from './TextEdit';
+import Image from './Image';
 import ChoicesEdit from './ChoicesEdit';
 import {Row, Col, Button} from 'react-materialize';
 import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { getPanel } from '../actions/index';
-import { getChoices } from '../actions/index';
 import NavBar from './NavBar';
 import { Link } from 'react-router-dom';
 import StoryChart from './StoryChart';
+
+
 
 
 
@@ -20,55 +19,72 @@ class NewPanelForm extends Component{
    constructor(props) {
     super(props);
     this.handleImageSubmit = this.handleImageSubmit.bind(this);
-
-    this.handleChange = this.handleChange.bind(this)
+    this.handleBodyTextChange = this.handleBodyTextChange.bind(this)
+    this.handleImageChange = this.handleImageChange.bind(this)
+    this.handleBodyTextSubmit = this.handleBodyTextSubmit.bind(this)
 
     this.state = {
-      newChoices: [],
+      choices: [],
+      body_text: "",
+      panel_id: "",
+      story_id: "",
+      image: ""
     };
-
-
   }
-    addNewChoice = (event) => {
-      if (event.key === "Enter") {
 
-        const newChoice = {
-          content: event.target.value};
-          event.target.value = ""
-          this.setState ({newChoices : event.target.value})
-        }
-      }
+    getImageandBodyText = () => {
 
+      return fetch(`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}`)
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({body_text: data.data.body_text,
+                       panel_id: data.data.id,
+                       story_id: data.data.story_id,
+                       image: data.data.image
+
+
+                      })
+        console.log("bt", this.state.panel_id)
+
+    })
+    .catch(err => console.log(err))
+  }
+
+    getChoices = () => {
+      return fetch(`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}/choices`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.data)
+        this.setState({choices: data.data})
+      })
+      .catch(err => console.log(err))
+
+}
     componentDidMount() {
 
-    this.props.dispatch(getPanel(this.props.match.params.storyid, this.props.match.params.panelid));
-    this.props.dispatch(getChoices(this.props.match.params.storyid, this.props.match.params.panelid));
+      this.getImageandBodyText()
+      this.getChoices()
 
-  }
-
-
-  handleImageSubmit(event) {
-    event.preventDefault()
-    var data = {panel: {
-
-      "id": this.props.match.params.panelid,
-      "image": this.image.value,
-      "story_id":this.props.match.params.storyid
-    }};
-    console.log(data);
-    fetch(`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}`, {
-      headers: {'Content-Type': 'application/json'},
-      method: "PUT",
-      body: JSON.stringify(data)
-    }).then(json => {
-        this.setState({panelid: json.data})
-        window.location.assign(`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}/edit`)
-      })
-  }
+    }
 
 
+    handleImageSubmit(event) {
+      event.preventDefault()
+      var data = {panel: {
 
-
+        "id": this.state.panel_id,
+        "image": this.state.image,
+        "story_id":this.state.story_id
+      }};
+      console.log(data);
+      fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}`, {
+        headers: {'Content-Type': 'application/json'},
+        method: "PUT",
+        body: JSON.stringify(data)
+      }).then(json => {
+          this.setState({panelid: json.data})
+        })
+    }
 
    handleChoiceSubmit = (event) => {
     event.preventDefault()
@@ -86,16 +102,34 @@ class NewPanelForm extends Component{
       body: JSON.stringify(data)
     }).then(json => {
         this.setState({choiceid: json.data})
-        const choiceid = json.data
         window.location.assign(`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}/edit`)
       })
   }
 
-   handleChange(event) {
-    this.setState({body_text: event.target.value});
+    handleBodyTextChange(event) {
+      this.setState({body_text: event.target.value});
+    }
+    handleImageChange(event) {
+      this.setState({image: event.target.value});
+    }
 
+    handleBodyTextSubmit(event) {
+
+    event.preventDefault()
+    console.log("131", this.state.panel_id)
+    var data = {panel: {
+
+      "id": this.state.panel_id,
+      "body_text": this.state.body_text,
+      "story_id":this.state.story_id
+    }};
+    console.log("sending", data);
+    fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}`, {
+      headers: {'Content-Type': 'application/json'},
+      method: "PUT",
+      body: JSON.stringify(data)
+    })
   }
-
 
 
   render(){
@@ -112,52 +146,66 @@ class NewPanelForm extends Component{
 
       <div>
 
-        <div className="mini-panel">
-          <Col s={11} m={6}>
-            <Panel panel={this.props.panel} />
-          </Col>
-          <Col s={11} m={5}>
-            <ChoicesEdit choices={this.props.choices} panel={this.props.panel}/>
-            </Col>
+      <div className="mini-panel">
+        <Col s={11} m={6}>
+          <Image image={this.state.image} />
+        </Col>
+        <Col s={11} m={5}>
+          <ChoicesEdit choices={this.state.choices} story_id={this.state.story_id}/>
+        </Col>
         </div>
-      <form className="form" onSubmit={this.handleChoiceSubmit}>
-        <Row>
-          <Col m={1}/>
-          <Col m={10}>
-          <div className="panel-form2">
+        <form className="form" onSubmit={this.handleChoiceSubmit}>
+          <Row>
+            <Col m={1}/>
+            <Col m={10}>
+              <div className="panel-form2">
 
+                <label>
+                  New Choice:
+                  <input type="text" ref={(input) => this.choiceBodyText = input} onKeyUp={this.props.addNewChoice}/>
+                </label>
+                <input className="waves-effect waves-light btn" type="submit" value="Submit" />
+              </div>
+            </Col>
+          </Row>
+        </form>
+      <Row>
+        <div className="panel-form">
+          <form className="form" onSubmit={this.handleImageSubmit}>
             <label>
-              New Choice:
-              <input type="text" ref={(input) => this.choiceBodyText = input} onKeyUp={this.props.addNewChoice}/>
+              Image:
+              <input type="text" value={this.state.image} onChange={this.handleImageChange} />
             </label>
             <input className="waves-effect waves-light btn" type="submit" value="Submit" />
-            </div>
-          </Col>
-        </Row>
-        </form>
-    <Row>
-      <div className="panel-form">
-        <form className="form" onSubmit={this.handleImageSubmit}>
-              <label>
-                Image:
-                <input type="text" ref={(input) => this.image = input} />
-              </label>
-              <input className="waves-effect waves-light btn" type="submit" value="Submit" />
-            </form>
+          </form>
 
           <Col m={1}/>
+        </div>
+      </Row>
+      <br/>
+      <div>
+        <Row>
+          <div className="body-text-panel-form">
+            <form className="form" onSubmit={this.handleBodyTextSubmit}>
+              <label>
+              Body Text:
+              <br/>
+              <textarea className="bodyTextForm" name="body_text" value={this.state.body_text} onChange={this.handleBodyTextChange} />
+                </label>
+                <br/>
+                <input className="waves-effect waves-light btn" type="submit" value="Submit" />
+            </form>
+
+            <Col m={1}/>
+          </div>
+        </Row>
       </div>
-    </Row>
-    <br/>
-    <div>
-      <TextEdit panel={this.props.panel}/>
+      <div>
+        <Link to={`/stories/${this.props.panel.story_id}/`} onClick={StoryChart }>
+        <Button>Back to the Chart!</Button>
+        </Link>
+      </div>
     </div>
-    <div>
-     <Link to={`/stories/${this.props.panel.story_id}/`} onClick={StoryChart }>
-      <Button>Back to the Chart!</Button>
-    </Link>
-    </div>
-  </div>
   </ReactCSSTransitionGroup>
   </div>
   );

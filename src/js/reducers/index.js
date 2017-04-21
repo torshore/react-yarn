@@ -6,7 +6,6 @@ import RowsReducer from './rows_reducer.js';
 import PanelsReducer from './panels_reducer.js';
 import { routerReducer } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
-import BodyTextReducer from './body_text_reducer.js'
 
 const allReducers = combineReducers({
   stories: StoriesReducer,
@@ -16,7 +15,6 @@ const allReducers = combineReducers({
   choices: ChoicesReducer,
   rows: RowsReducer,
   panels: PanelsReducer,
-  body_text: BodyTextReducer
 });
 
 export default allReducers;

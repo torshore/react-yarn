@@ -87,23 +87,7 @@ export const getPanels = (storyid) => {
   }
 }
 
-export const changeBodyText = (body_text) => {
-  console.log("body text was changed to", body_text );
-  return {
-    type: "BODY_TEXT_CHANGED",
-    payload: body_text
-  }
-}
 
-
-
-
-//   const request = axios.post('/stories', props);
-//   return{
-//     type: CREATE_STORY,
-//     payload: request
-//   };
-// }
 
 
 
