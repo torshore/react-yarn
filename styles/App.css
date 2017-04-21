@@ -300,3 +300,18 @@ body {
   position: relative;
   margin-top: 25%;
 }
+
+.bodyTextForm {
+  height: 10em;
+  width: 15em;
+}
+
+.body-text-panel-form {
+  background-color: white;
+  width: 30em;
+  border: .5em solid black;
+  position: fixed;
+  bottom: 10em;
+  right: 40em;
+  z-index: 99;
+}

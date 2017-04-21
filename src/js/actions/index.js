@@ -80,9 +80,18 @@ export const getPanels = (storyid) => {
       .then(response => response.json())
       .then((data) => {
         console.log(data)
+
         return dispatch({type: "GET_PANELS", payload: data.data})
       })
       .catch(err => console.log(err))
+  }
+}
+
+export const changeBodyText = (body_text) => {
+  console.log("body text was changed to", body_text );
+  return {
+    type: "BODY_TEXT_CHANGED",
+    payload: body_text
   }
 }
 

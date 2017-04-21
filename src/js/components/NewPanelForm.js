@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Panel from './Panel';
-import TextBox from './TextBox';
+import TextEdit from './TextEdit';
 import ChoicesEdit from './ChoicesEdit';
 import {Row, Col, Button} from 'react-materialize';
 import { connect } from 'react-redux';
@@ -12,16 +12,22 @@ import { Link } from 'react-router-dom';
 import StoryChart from './StoryChart';
 
 
+
 class NewPanelForm extends Component{
   static contextTypes = {
     router: PropTypes.object
   };
    constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleImageSubmit = this.handleImageSubmit.bind(this);
+
+    this.handleChange = this.handleChange.bind(this)
+
     this.state = {
-      newChoices: []
+      newChoices: [],
     };
+
+
   }
     addNewChoice = (event) => {
       if (event.key === "Enter") {
@@ -33,23 +39,20 @@ class NewPanelForm extends Component{
         }
       }
 
-
-
     componentDidMount() {
 
     this.props.dispatch(getPanel(this.props.match.params.storyid, this.props.match.params.panelid));
     this.props.dispatch(getChoices(this.props.match.params.storyid, this.props.match.params.panelid));
+
   }
 
-  handleSubmit(event) {
+
+  handleImageSubmit(event) {
     event.preventDefault()
     var data = {panel: {
 
       "id": this.props.match.params.panelid,
-
-      "title": this.title.value,
       "image": this.image.value,
-      "body_text": this.body_text.value,
       "story_id":this.props.match.params.storyid
     }};
     console.log(data);
@@ -62,6 +65,10 @@ class NewPanelForm extends Component{
         window.location.assign(`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}/edit`)
       })
   }
+
+
+
+
 
    handleChoiceSubmit = (event) => {
     event.preventDefault()
@@ -83,6 +90,13 @@ class NewPanelForm extends Component{
         window.location.assign(`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}/edit`)
       })
   }
+
+   handleChange(event) {
+    this.setState({body_text: event.target.value});
+
+  }
+
+
 
   render(){
     return(
@@ -106,12 +120,6 @@ class NewPanelForm extends Component{
             <ChoicesEdit choices={this.props.choices} panel={this.props.panel}/>
             </Col>
         </div>
-
-        <div className="textedit">
-        <TextBox className="textedit" panel={this.props.panel}/>
-        </div>
-
-
       <form className="form" onSubmit={this.handleChoiceSubmit}>
         <Row>
           <Col m={1}/>
@@ -129,15 +137,7 @@ class NewPanelForm extends Component{
         </form>
     <Row>
       <div className="panel-form">
-        <form className="form" onSubmit={this.handleSubmit}>
-          <label>
-            Title:
-              <input type="text" ref={(input) => this.title = input} />
-              </label>
-              <label>
-                Chapter Text:
-                <input type="text" ref={(input) => this.body_text = input} />
-              </label>
+        <form className="form" onSubmit={this.handleImageSubmit}>
               <label>
                 Image:
                 <input type="text" ref={(input) => this.image = input} />
@@ -148,6 +148,10 @@ class NewPanelForm extends Component{
           <Col m={1}/>
       </div>
     </Row>
+    <br/>
+    <div>
+      <TextEdit panel={this.props.panel}/>
+    </div>
     <div>
      <Link to={`/stories/${this.props.panel.story_id}/`} onClick={StoryChart }>
       <Button>Back to the Chart!</Button>
@@ -166,7 +170,11 @@ function mapStateToProps(state) {
   return{panel: state.panel.panel,
          choices: state.choices.choices};
 
+
 }
+
+
+
 
 export default connect(mapStateToProps)(NewPanelForm);
 
