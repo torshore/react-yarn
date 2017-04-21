@@ -31,7 +31,9 @@ class NewPanelForm extends Component{
       panel_id: "",
       story_id: "",
       image: "",
-      new_choice_body_text: ""
+      new_choice_body_text: "",
+      index: ""
+
     };
   }
 
@@ -43,7 +45,8 @@ class NewPanelForm extends Component{
         this.setState({body_text: data.data.body_text,
                        panel_id: data.data.id,
                        story_id: data.data.story_id,
-                       image: data.data.image
+                       image: data.data.image,
+                       index: data.data.index
 
 
                       })
@@ -94,7 +97,7 @@ class NewPanelForm extends Component{
       "panel_id": this.state.panel_id,
       "body_text": this.state.new_choice_body_text,
       "story_id": this.state.story_id,
-      "index": this.props.panel.index
+      "index": this.state.index
 
     }};
     console.log(data);
@@ -207,7 +210,7 @@ class NewPanelForm extends Component{
         </Row>
       </div>
       <div>
-        <Link to={`/stories/${this.props.panel.story_id}/`} onClick={StoryChart }>
+        <Link to={`/stories/${this.state.story_id}/`} onClick={StoryChart }>
         <Button>Back to the Chart!</Button>
         </Link>
       </div>
