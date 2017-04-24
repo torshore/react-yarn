@@ -1,15 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
-import NewPanelForm from './NewPanelForm.js';
-import {Collection, CollectionItem, Row, Button} from 'react-materialize';
+import {Button} from 'react-materialize';
 
 class ChoicesEdit extends React.Component {
 
-
-
   render(){
-
-
     return (
                 <div className="choice-panel-form" >
             { this.props.choices.map((choice, index) => {
@@ -22,9 +16,7 @@ class ChoicesEdit extends React.Component {
                              onKeyUp={this.props.handleChoiceChange}
                              label={choice.story_id}
                              title={choice.panel_id}  />
-
                   </div>
-
                 </div>
         )
       })}
