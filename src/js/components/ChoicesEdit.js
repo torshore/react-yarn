@@ -28,7 +28,7 @@ class ChoicesEdit extends React.Component {
                 </div>
         )
       })}
-            <Button floating className='grey' waves='light' icon='add' onClick={this.handleChoiceAdd} />
+            <Button floating className='grey' waves='light' icon='add' onClick={this.props.handleChoiceAdd} />
     </div>
     )
   }
