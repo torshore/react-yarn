@@ -1,30 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import NewPanelForm from './NewPanelForm.js';
-import {Collection, CollectionItem, Row} from 'react-materialize';
+import {Collection, CollectionItem, Row, Button} from 'react-materialize';
 
 class ChoicesEdit extends React.Component {
 
+
+
   render(){
-    const storyid = this.props.story_id
+
+
     return (
-      <div>
-      { this.props.choices.map((choice, index) => {
-        return (
-          <Row key={index}>
-          <div>
-           <Link to={`/stories/${storyid}/panels/${choice.path_to}/edit`} onClick={NewPanelForm}>
-              <Collection className="choice">
-                <CollectionItem className="grey-text text-darken-3 choice"> {choice.body_text}</CollectionItem>
-              </Collection>
-            </Link>
-          </div>
-          </Row>
-          )
+                <div className="choice-panel-form" >
+            { this.props.choices.map((choice, index) => {
+              return (
+                <div key={choice.id} className="choice-box" >
+                  <div  >
+
+                      <input defaultValue={choice.body_text}
+                             name={choice.id}
+                             onKeyUp={this.props.handleChoiceChange}
+                             label={choice.story_id}
+                             title={choice.panel_id}  />
+
+                  </div>
+
+                </div>
+        )
       })}
-      </div>
+            <Button floating className='grey' waves='light' icon='add' onClick={this.handleChoiceAdd} />
+    </div>
     )
   }
 }
 
+
+
 export default ChoicesEdit;
+
