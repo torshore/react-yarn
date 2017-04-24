@@ -1,16 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import Image from './Image';
 import ChoicesEdit from './ChoicesEdit';
-import {Row, Col, Button} from 'react-materialize';
-import { connect } from 'react-redux';
+import {Button} from 'react-materialize';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import NavBar from './NavBar';
 import { Link } from 'react-router-dom';
 import StoryChart from './StoryChart';
-
-
-
-
 
 class NewPanelForm extends Component{
   static contextTypes = {
@@ -60,7 +55,7 @@ class NewPanelForm extends Component{
 
 
                       })
-        console.log("bt", this.state.panel_id)
+
 
     })
     .catch(err => console.log(err))
@@ -70,7 +65,7 @@ class NewPanelForm extends Component{
       return fetch(`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}/choices`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.data)
+
         this.setState({choices: data.data})
       })
       .catch(err => console.log(err))
@@ -101,6 +96,7 @@ class NewPanelForm extends Component{
           this.setState({panelid: json.data})
         })
     }
+
    handleChoiceAdd = (event) => {
     event.preventDefault()
     var data = {choice: {
@@ -137,8 +133,6 @@ class NewPanelForm extends Component{
 
     }
 
-
-
     handleChoiceChange(event) {
 
        if (event.key === "Enter") {
@@ -158,8 +152,6 @@ class NewPanelForm extends Component{
         })
       }
     }
-
-
 
     handleBodyTextSubmit(event) {
 
