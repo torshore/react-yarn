@@ -224,6 +224,7 @@ class NewPanelForm extends Component{
                        handleChoiceChange={this.handleChoiceChange}
                        story_id={this.state.story_id}
                        panel_id={this.state.panel_id}
+                       handleChoiceAdd={this.handleChoiceAdd}
                         />
 
       <div className="back-btn">
@@ -240,18 +241,7 @@ class NewPanelForm extends Component{
 }
 
 
-function mapStateToProps(state) {
-
-  return{panel: state.panel.panel,
-         choices: state.choices.choices};
-
-
-}
-
-
-
-
-export default connect(mapStateToProps)(NewPanelForm);
+export default NewPanelForm;
 
 
 
