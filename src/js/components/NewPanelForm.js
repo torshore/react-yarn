@@ -13,15 +13,7 @@ class NewPanelForm extends Component{
   };
    constructor(props) {
     super(props);
-    this.chartEvents = [
-      {
-        eventName: 'select',
-        callback(Chart) {
-            // Returns Chart so you can access props and  the ChartWrapper object from chart.wrapper
-          console.log('Selected ', Chart.chart.getSelection());
-        },
-      },
-    ];
+
     this.handleImageSubmit = this.handleImageSubmit.bind(this);
     this.handleBodyTextChange = this.handleBodyTextChange.bind(this)
     this.handleImageChange = this.handleImageChange.bind(this)
