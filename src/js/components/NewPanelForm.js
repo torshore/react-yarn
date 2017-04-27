@@ -23,6 +23,7 @@ class NewPanelForm extends Component{
     this.handleChoiceBodyTextChange = this.handleChoiceBodyTextChange.bind(this)
     this.handleChoiceSubmit = this.handleChoiceSubmit.bind(this)
     this.handleChoiceAdd = this.handleChoiceAdd.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
 
     this.state = {
       choices: [],
@@ -31,7 +32,8 @@ class NewPanelForm extends Component{
       story_id: "",
       image: "",
       index: "",
-      choice: ''
+      choice: "",
+      display: "none"
 
     };
   }
@@ -61,6 +63,9 @@ class NewPanelForm extends Component{
       .then((data) => {
 
         this.setState({choices: data.data})
+        if (this.state.choices.length === 0){
+          this.setState({display: "inline"})
+        }
       })
       .catch(err => console.log(err))
 
@@ -163,6 +168,23 @@ class NewPanelForm extends Component{
       body: JSON.stringify(data)
     })
   }
+    handleDelete(event) {
+
+      event.preventDefault()
+      var data = {panel: {
+        "id": this.state.panel_id
+      }}
+      console.log(data);
+      fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}`, {
+        headers: {'Content-Type': 'application/json'},
+          method: "DELETE",
+          body: JSON.stringify(data)
+        }).then(json => {
+          console.log(data)
+          window.location.assign(`/stories/${this.state.story_id}`)
+
+        })
+    }
 
 
   render(){
@@ -218,6 +240,7 @@ class NewPanelForm extends Component{
         <Button>Back to the Chart!</Button>
         </Link>
       </div>
+      <Button className="delete-btn" onClick={this.handleDelete} style={{display: this.state.display}}>Delete this Panel</Button>
     </div>
 
   </ReactCSSTransitionGroup>
