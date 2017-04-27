@@ -27,7 +27,7 @@ const router = (
           <Route path="/stories/:storyid/" component={StoryChart}/>
           <Route path="/storiesedit" component={StoriesHomeEdit} />
           <Route path="/stories" component={StoriesHome} />
-          <Route exact={true }path="/" component={Home}/>
+          <Route exact={true} path="/" component={Home}/>
         </Switch>
       </App>
    </BrowserRouter>
@@ -35,4 +35,3 @@ const router = (
   )
 
 render(router, document.getElementById('root'));
-

@@ -270,7 +270,10 @@ body {
 }
 
 .row.wrapper {
-  height: 800px;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0px;
 }
 
 .frame {
@@ -344,3 +347,4 @@ body {
   cursor: pointer;
   width: 1%;
 }
+

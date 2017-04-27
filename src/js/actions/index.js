@@ -1,7 +1,6 @@
-// import { GET_STORIES } from './types.js';
 import 'whatwg-fetch';
-// import axios from 'axios'
-import {CREATE_STORY} from './types'
+// import 'CREATE_STORY' from './types.js';
+
 
 
 export const getStories = () => {
@@ -59,7 +58,7 @@ export const createStory = (props) => {
 
     fetch("/stories", {
       method: 'post',
-      type: CREATE_STORY,
+      type: "CREATE_STORY",
       body: props
     })
 
@@ -86,8 +85,3 @@ export const getPanels = (storyid) => {
       .catch(err => console.log(err))
   }
 }
-
-
-
-
-
