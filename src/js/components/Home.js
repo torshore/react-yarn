@@ -1,8 +1,23 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Col, Row} from 'react-materialize';
 
 
-const Home = React.createClass({
+class Home extends Component{
+   constructor(props) {
+    super(props);
+    this.handleChangeDisplay = this.handleChangeDisplay.bind(this)
+    this.state = {
+      display: 'none'
+
+    }
+
+  }
+handleChangeDisplay(event) {
+    if (this.state.display === 'none') {
+      this.setState({display: 'inline'});
+    } else {this.setState({display: 'none'})}
+    }
+
   render() {
     return (
       <div>
@@ -11,9 +26,16 @@ const Home = React.createClass({
         <Row>
           <Col m={1}/>
           <Col m={3}>
+          <div className="hand-pointer" onClick={this.handleChangeDisplay}>
+            <img className="btn-build" src="/bulb.png" alt="link"/>
+            <h3 className="link"> BUILD!  </h3>
+          </div>
             <a href="/new">
-              <img className="btn-build" src="/bulb.png" alt="link"/>
-              <h3 className="link"> BUILD!  </h3>
+              <h6 className="link" style={{display: this.state.display}}>new</h6>
+            </a>
+
+            <a href="/storiesedit">
+              <h6 className="link" style={{display: this.state.display}}>existing</h6>
             </a>
           </Col>
           <Col m={4}/>
@@ -29,6 +51,6 @@ const Home = React.createClass({
       </div>
     )
   }
-});
+};
 
 export default Home;

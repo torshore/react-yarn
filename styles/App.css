@@ -342,3 +342,9 @@ body {
   border:solid;
   height:3em;
 }
+
+.hand-pointer {
+  cursor: pointer;
+  width: 1%;
+}
+

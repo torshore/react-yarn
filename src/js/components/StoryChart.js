@@ -2,23 +2,35 @@ import React, { Component } from 'react';
 import { Chart } from 'react-google-charts';
 import { getRow } from '../actions/index';
 import { connect } from 'react-redux';
-import StoryEdit from './StoryEdit.js'
 import { Col, Row } from 'react-materialize';
 import { getPanels } from '../actions/index';
 import NavBar from './NavBar';
 
+const storyEditLink = (storyid, panelindex) => {
+  return fetch(`/stories/${storyid}/panels/chartshow/${panelindex}`)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('hello', data.data[0].id)
+      window.location.assign(`/stories/${storyid}/panels/${data.data[0].id}/edit`)
+      })
+    .catch(err => console.log(err))
+  }
+
 class StoryChart extends Component {
   constructor(props) {
     super(props);
+    const story_id = this.props.match.params.storyid
     this.chartEvents = [
     {
       eventName: 'select',
       callback(Chart) {
-        console.log('Selected', Chart.chart.getSelection());
+
+        storyEditLink(story_id, Chart.chart.getSelection()[0].row + 1)
       },
     },
     ]
   }
+
    componentDidMount() {
     this.props.dispatch(getRow(this.props.match.params.storyid));
     this.props.dispatch(getPanels(this.props.match.params.storyid));
@@ -27,13 +39,16 @@ class StoryChart extends Component {
   columnRow = (dataFromDb) => {
     let result = dataFromDb.map((row, index) => {
       var array = [];
+
         array.push(row.index2.toString(), row.index.toString())
         return array
     });
       return result;
+
   }
   render() {
     let rowsData = this.columnRow(this.props.rows);
+    rowsData.unshift(["1", ""])
 
     if (rowsData.length === 0) {
       return <div />
@@ -47,9 +62,7 @@ return (
   <div>
     <Row className="build">
       <Col m={3}>
-        <h3 className="bldtitle2"> View Chapters: </h3>
 
-        <StoryEdit panels={this.props.panels}/>
       </Col>
       <Col m={8} className="chart">
         <h3 className="bldtitle3">Story Paths:</h3>
