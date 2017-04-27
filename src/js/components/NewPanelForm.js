@@ -113,6 +113,7 @@ class NewPanelForm extends Component{
     }).then(json => {
       console.log('choices', data)
         this.setState({new_choice_body_text: ""})
+        this.setState({display: "none"})
           this.getChoices()
         })
   }
