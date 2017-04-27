@@ -340,3 +340,6 @@ body {
   height:3em;
 }
 
+.hand-pointer {
+  cursor: pointer;
+}

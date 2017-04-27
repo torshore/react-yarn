@@ -1,19 +1,38 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Col, Row} from 'react-materialize';
 
 
-const Home = React.createClass({
+class Home extends Component{
+   constructor(props) {
+    super(props);
+    this.handleChangeVisibility = this.handleChangeVisibility.bind(this)
+    this.state = {
+      visibility: 'hidden'
+
+    }
+
+  }
+handleChangeVisibility(event) {
+      this.setState({visibility: 'visible'});
+    }
+
   render() {
     return (
       <div>
-        <h1 className="title">Yarn</h1>
+        <h1 className ="title">Yarn</h1>
         <div>
         <Row>
           <Col m={1}/>
           <Col m={3}>
+          <div className="hand-pointer" onClick={this.handleChangeVisibility}>
+            <img className="btn-build" src="/bulb.png" alt="link"/>
+            <h3 className="link"> BUILD!  </h3>
+          </div>
             <a href="/new">
-              <img className="btn-build" src="/bulb.png" alt="link"/>
-              <h3 className="link"> BUILD!  </h3>
+              <h6 className="link" style={{visibility: this.state.visibility}}>new</h6>
+            </a>
+            <a href="/storiesedit">
+              <h6 className="link" style={{visibility: this.state.visibility}}>existing</h6>
             </a>
           </Col>
           <Col m={4}/>
@@ -29,6 +48,6 @@ const Home = React.createClass({
       </div>
     )
   }
-});
+};
 
 export default Home;
