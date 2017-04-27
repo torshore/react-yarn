@@ -342,4 +342,5 @@ body {
 
 .hand-pointer {
   cursor: pointer;
+  width: 1%;
 }
