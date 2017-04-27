@@ -8,9 +8,11 @@ import { Link } from 'react-router-dom';
 import StoryChart from './StoryChart';
 
 class NewPanelForm extends Component{
+
   static contextTypes = {
     router: PropTypes.object
   };
+
    constructor(props) {
     super(props);
 
