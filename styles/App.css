@@ -337,6 +337,12 @@ body {
   right: 0;
 }
 
+.delete-btn {
+  position:fixed;
+  top: 0;
+  right:0;
+}
+
 .choice-box {
   margin: 1em;
   border:solid;
