@@ -16,7 +16,7 @@ class StoriesHome extends Component{
   renderStories() {
     return this.props.stories.map((story) => {
       return (
-        <div>
+        <div key={story.id}>
 
 
         <div className="single-story" key={story.id}>
@@ -55,6 +55,3 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps)(StoriesHome);
-
-
-
