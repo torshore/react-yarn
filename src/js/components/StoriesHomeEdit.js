@@ -7,7 +7,7 @@ import NavBar from './NavBar';
 
 
 
-class StoriesHome extends Component{
+class StoriesHomeEdit extends Component{
 
   componentDidMount() {
     this.props.dispatch(getStories());
@@ -26,7 +26,7 @@ class StoriesHome extends Component{
             header={<CardTitle image={story.image}> {story.title}</CardTitle>} >
               <p className="tag"> {story.tagline} </p>
               <div className="card-action grey-text">
-                <a className="story-link grey-text text-darken-2" href={`/stories/${story.id}/panels/${story.firstpanel}`}>Choose this Adventure!</a>
+                <a className="story-link grey-text text-darken-2" href={`/stories/${story.id}`}>Choose this Adventure!</a>
               </div>
             </Card>
           </Col>
@@ -54,7 +54,4 @@ function mapStateToProps(state){
   return {stories: state.stories.stories }
 }
 
-export default connect(mapStateToProps)(StoriesHome);
-
-
-
+export default connect(mapStateToProps)(StoriesHomeEdit);
