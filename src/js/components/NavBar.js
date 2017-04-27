@@ -20,7 +20,10 @@ export default class NavBar extends Component {
          Play
        </NavItem>
        <NavItem href="/new" className="grey-text">
-         Build
+         Build New
+      </NavItem>
+      <NavItem href="/storiesedit" className="grey-text">
+         Build Existing
       </NavItem>
     </Dropdown>
     </div>

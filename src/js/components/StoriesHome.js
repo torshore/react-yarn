@@ -16,10 +16,10 @@ class StoriesHome extends Component{
   renderStories() {
     return this.props.stories.map((story) => {
       return (
-        <div>
+        <div key={story.id}>
 
 
-        <div className="single-story" key={story.id}>
+        <div className="single-story" >
           <Col s={1} m={1}/>
           <Col s={11} m={5}>
             <Card  className='small horizontal hoverable'

@@ -5,34 +5,37 @@ import { Col, Row} from 'react-materialize';
 class Home extends Component{
    constructor(props) {
     super(props);
-    this.handleChangeVisibility = this.handleChangeVisibility.bind(this)
+    this.handleChangeDisplay = this.handleChangeDisplay.bind(this)
     this.state = {
-      visibility: 'hidden'
+      display: 'none'
 
     }
 
   }
-handleChangeVisibility(event) {
-      this.setState({visibility: 'visible'});
+handleChangeDisplay(event) {
+    if (this.state.display === 'none') {
+      this.setState({display: 'inline'});
+    } else {this.setState({display: 'none'})}
     }
 
   render() {
     return (
       <div>
-        <h1 className ="title">Yarn</h1>
+        <h1 className="title">Yarn</h1>
         <div>
         <Row>
           <Col m={1}/>
           <Col m={3}>
-          <div className="hand-pointer" onClick={this.handleChangeVisibility}>
+          <div className="hand-pointer" onClick={this.handleChangeDisplay}>
             <img className="btn-build" src="/bulb.png" alt="link"/>
             <h3 className="link"> BUILD!  </h3>
           </div>
             <a href="/new">
-              <h6 className="link" style={{visibility: this.state.visibility}}>new</h6>
+              <h6 className="link" style={{display: this.state.display}}>new</h6>
             </a>
+
             <a href="/storiesedit">
-              <h6 className="link" style={{visibility: this.state.visibility}}>existing</h6>
+              <h6 className="link" style={{display: this.state.display}}>existing</h6>
             </a>
           </Col>
           <Col m={4}/>
