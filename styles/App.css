@@ -96,16 +96,6 @@ body {
   background-size: cover;
 }
 
-.panel-img {
-  margin: 20px auto;
-  box-shadow: 0px 3px 15px rgba(0,0,0,0.6);
-  border: 15px solid black;
-  max-width: 550px;
-  top: 170px;
-  bottom: 200px;
-  max-height: 700px;
-}
-
 .bldpaneltitle {
   padding: 10px;
   font-family: 'Arvo', serif;
@@ -116,11 +106,15 @@ body {
 
 .panel-form {
   background-color: white;
-  width: 100%;
-  height: 170px;
-  border: 5px solid black;
-  bottom: 30px;
+  width: 20vw;
+  height: 10vh;
+  border: 0.5em solid black;
   z-index: 99;
+  margin: 0 auto;
+  overflow-y: auto;
+  position: absolute;
+  bottom: 0;
+
 }
 
 .panel-form2{
@@ -134,22 +128,12 @@ body {
   z-index: 99;
 }
 
-.mini-panel {
-  border: 5px solid black;
-  width: 70%;
-  height: 80%;
-  background: rgba(145, 85, 77, 0.75);
-  max-width: 535px;
-  margin: 20px;
-  top: 170px;
-  bottom: 200px;
-  max-height: 700px;
-}
-
-.mini-panel .panel-img {
-  width: 75%;
-  height: 65%;
-  transform: translate(-20px);
+.panel-img {
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.6);
+  border: 15px solid black;
+  height: 100%;
+  width: 100%;
+  resize: both;
 }
 
 .textedit {
@@ -158,7 +142,7 @@ body {
   width: 40%;
 }
 
-.mini-panel .choices {
+.choices {
   transform: translate(0, -400px);
   z-index: 99;
 }
@@ -276,9 +260,6 @@ body {
   margin-bottom: 0px;
 }
 
-.frame {
-  margin-left: 50px;
-}
 
 .smallPicture {
   float: left;
@@ -353,4 +334,23 @@ body {
   cursor: pointer;
   width: 1%;
 }
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+}
+
+.image-frame {
+  max-height: 100vh;
+  max-width: 100vw;
+  resize: both;
+  overflow: auto;
+
+
+}
+
+
 

@@ -5,8 +5,6 @@ import { getStories } from '../actions/index';
 import NavBar from './NavBar';
 
 
-
-
 class StoriesHomeEdit extends Component{
 
   componentDidMount() {

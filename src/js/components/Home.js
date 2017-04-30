@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { Col, Row} from 'react-materialize';
 
 
+
+
 class Home extends Component{
    constructor(props) {
     super(props);
@@ -16,9 +18,13 @@ handleChangeDisplay(event) {
     if (this.state.display === 'none') {
       this.setState({display: 'inline'});
     } else {this.setState({display: 'none'})}
-    }
+  }
 
   render() {
+    const divstyle = {
+      display: this.state.display,
+    }
+
     return (
       <div>
         <h1 className="title">Yarn</h1>
@@ -31,11 +37,11 @@ handleChangeDisplay(event) {
             <h3 className="link"> BUILD!  </h3>
           </div>
             <a href="/new">
-              <h6 className="link" style={{display: this.state.display}}>new</h6>
+              <h6 className="link" style={divstyle}>new</h6>
             </a>
 
             <a href="/storiesedit">
-              <h6 className="link" style={{display: this.state.display}}>existing</h6>
+              <h6 className="link" style={divstyle}>existing</h6>
             </a>
           </Col>
           <Col m={4}/>
