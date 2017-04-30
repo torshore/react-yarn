@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { getPanel } from '../actions/index';
@@ -11,9 +11,7 @@ import TextBox from './TextBox.js';
 import NavBar from './NavBar';
 
 class SingleStoryShow extends Component{
-  static contextTypes = {
-    router: PropTypes.object
-  };
+
 
   componentDidMount() {
 
