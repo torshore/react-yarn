@@ -11,6 +11,7 @@
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-transition-group": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-draggable": "^2.2.6",
     "react-fittext": "0.0.7",
     "react-google-charts": "^1.5.4-alpha.1",
     "react-materialize": "^0.18.1",
