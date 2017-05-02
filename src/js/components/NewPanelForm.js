@@ -26,6 +26,7 @@ class NewPanelForm extends Component{
     this.handleDrag = this.handleDrag.bind(this)
     this.handleImageReposition = this.handleImageReposition.bind(this)
     this.handleImagePanelShow = this.handleImagePanelShow.bind(this)
+    this.handleUndo = this.handleUndo.bind(this)
 
     this.state = {
       choices: [],
@@ -53,10 +54,10 @@ class NewPanelForm extends Component{
       return fetch(`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}`)
       .then((response) => response.json())
       .then((data) => {
-        this.setState({body_text: data.data.body_text,
+        this.setState({body_text: (data.data.body_text || ""),
                        panel_id: data.data.id,
                        story_id: data.data.story_id,
-                       image: data.data.image,
+                       image: (data.data.image || ""),
                        index: data.data.index,
                        image_height: data.data.image_height,
                        image_width: data.data.image_width,
@@ -257,6 +258,17 @@ class NewPanelForm extends Component{
         console.log(this.state.position)
       }
 
+      handleUndo() {
+        this.setState({
+          position: {
+            x: 15,
+            y: 15
+          },
+          image_height: "600px",
+          image_width: "350px"
+        })
+      }
+
 
     render(){
       const imageStyle = {
@@ -315,15 +327,15 @@ class NewPanelForm extends Component{
             transitionEnterTimeout={600}
             transitionLeave={false}>
 
-
-        <div>
-
+          <div>
+          <div className="undo-btn">
+            <i className="fa fa-undo fa-2x" onClick={this.handleUndo}/>
+          </div>
           <div className="panel-form" style={imagePanelStyle} >
             <form className="form" onSubmit={this.handleImageSubmit}>
               <label>
-                <input type="text" value={this.state.image}  />
+                <input type="text" value={this.state.image} onChange={this.handleImageChange} />
               </label>
-              <input className="waves-effect waves-light btn" type="submit" value="Submit" />
             </form>
           </div>
           <div onMouseUp={this.handleImageResize}>
@@ -333,11 +345,11 @@ class NewPanelForm extends Component{
                   <i className="fa fa-external-link " onClick={this.handleImagePanelShow}/>
                 </div>
                 <strong className="cursor">
-                  <div className = "drag-icon">
+                  <div className="drag-icon">
                     <i className="fa fa-arrows"/>
                   </div>
                 </strong>
-                <img src={this.state.image} className="panel-img" alt="Story"/>
+                <img src={this.state.image} className="panel-img" alt="Insert Your Image Here"/>
               </div>
             </Draggable>
           </div>
