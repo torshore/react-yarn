@@ -106,11 +106,11 @@ body {
 
 .panel-form {
   background-color: white;
-  width: 20vw;
+  width: 50vw;
   height: 10vh;
   border: 0.5em solid black;
   z-index: 99;
-  margin: 0 auto;
+  left: 25%;
   overflow-y: auto;
   position: absolute;
   bottom: 0;
@@ -352,15 +352,27 @@ body {
 }
 
 .react-draggable strong {
-  background: #ddd;
-  border: 1px solid #999;
-  border-radius: 3px;
+  color: #c9cab3;
   display: block;
-  margin-bottom: 10px;
-  padding: 3px 5px;
+  padding: 1px 1px 1px 1px;
   text-align: center;
   position: absolute;
 }
 
+.drag-icon:hover {
+  color: #62c189;
+}
 
+.image-form-icon {
+  right: 0;
+  color: #c9cab3;
+  display: block;
+  padding: 1px 1px 1px 1px;
+  top: 0;
+  position: absolute;
+}
+
+.image-form-icon:hover {
+  color: #62c189  ;
+}
 

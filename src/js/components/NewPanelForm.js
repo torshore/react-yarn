@@ -11,7 +11,7 @@ import Draggable from 'react-draggable';
 class NewPanelForm extends Component{
 
 
-   constructor(props) {
+  constructor(props) {
     super(props);
 
     this.handleImageSubmit = this.handleImageSubmit.bind(this);
@@ -22,9 +22,10 @@ class NewPanelForm extends Component{
     this.handleChoiceSubmit = this.handleChoiceSubmit.bind(this)
     this.handleChoiceAdd = this.handleChoiceAdd.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
-    this.handleImageResizeAndMove = this.handleImageResizeAndMove.bind(this)
+    this.handleImageResize = this.handleImageResize.bind(this)
     this.handleDrag = this.handleDrag.bind(this)
     this.handleImageReposition = this.handleImageReposition.bind(this)
+    this.handleImagePanelShow = this.handleImagePanelShow.bind(this)
 
     this.state = {
       choices: [],
@@ -38,8 +39,9 @@ class NewPanelForm extends Component{
       image_height: "",
       image_width: "",
       position: {
-        x: 0, y: 0
-      }
+        x: 15, y: 15
+      },
+      imagePanelDisplay: 'none'
 
 
 
@@ -61,9 +63,9 @@ class NewPanelForm extends Component{
                        position: {x: data.data.image_position_x, y: data.data.image_position_y}
                       })
 
-    })
-    .catch(err => console.log(err))
-  }
+      })
+        .catch(err => console.log(err))
+    }
 
     getChoices = () => {
       return fetch(`/stories/${this.props.match.params.storyid}/panels/${this.props.match.params.panelid}/choices`)
@@ -78,110 +80,117 @@ class NewPanelForm extends Component{
       .catch(err => console.log(err))
 
 }
-    componentDidMount() {
+      componentDidMount() {
 
-      this.getImageandBodyText()
-      this.getChoices()
+        this.getImageandBodyText()
+        this.getChoices()
 
-    }
+      }
 
 
-    handleImageSubmit(event) {
+      handleImageSubmit(event) {
+        event.preventDefault()
+        var data = {panel: {
+
+          "id": this.state.panel_id,
+          "image": this.state.image,
+          "story_id":this.state.story_id
+        }};
+        console.log(data);
+        fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}`, {
+          headers: {'Content-Type': 'application/json'},
+          method: "PUT",
+          body: JSON.stringify(data)
+        }).then(json => {
+            this.setState({panelid: json.data})
+          })
+      }
+
+     handleChoiceAdd = (event) => {
       event.preventDefault()
-      var data = {panel: {
+      var data = {choice: {
+        "panel_id": this.state.panel_id,
+        "body_text": "",
+        "story_id": this.state.story_id,
+        "index": this.state.index
 
-        "id": this.state.panel_id,
-        "image": this.state.image,
-        "story_id":this.state.story_id
       }};
       console.log(data);
-      fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}`, {
+      fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}/choices`, {
         headers: {'Content-Type': 'application/json'},
-        method: "PUT",
+        method: "POST",
         body: JSON.stringify(data)
       }).then(json => {
-          this.setState({panelid: json.data})
-        })
-    }
-
-   handleChoiceAdd = (event) => {
-    event.preventDefault()
-    var data = {choice: {
-      "panel_id": this.state.panel_id,
-      "body_text": "",
-      "story_id": this.state.story_id,
-      "index": this.state.index
-
-    }};
-    console.log(data);
-    fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}/choices`, {
-      headers: {'Content-Type': 'application/json'},
-      method: "POST",
-      body: JSON.stringify(data)
-    }).then(json => {
-      console.log('choices', data)
-        this.setState({new_choice_body_text: ""})
-        this.setState({display: "none"})
-          this.getChoices()
-        })
-  }
-
-    handleBodyTextChange(event) {
-      this.setState({body_text: event.target.value});
-    }
-    handleImageChange(event) {
-      this.setState({image: event.target.value});
-    }
-
-    handleImageResizeAndMove(event) {
-      const width = event.target.style.width.toString()
-      const height = event.target.style.height.toString()
-      const data = {panel: {
-        "id": this.state.panel_id,
-        "image_width": width,
-        "image_height": height
-      }}
-
-      console.log(width, height)
-      console.log(event.target.style)
-      if (width != 0 && height !=0) {this.setState({image_width: width,
-                                                image_height: height })
-
-      fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}`, {
-        headers: {'Content-Type': 'application/json'},
-        method: "PUT",
-        body: JSON.stringify(data)
-        })
+        console.log('choices', data)
+          this.setState({new_choice_body_text: ""})
+          this.setState({display: "none"})
+            this.getChoices()
+          })
       }
-    }
 
-    handleImageReposition(){
+      handleBodyTextChange(event) {
+        this.setState({body_text: event.target.value});
+      }
 
-      const data = {panel : {
-        "id": this.state.panel_id,
-        "image_position_x": this.state.position.x,
-        "image_position_y": this.state.position.y
-      }}
+      handleImageChange(event) {
+        this.setState({image: event.target.value});
+      }
 
-      console.log(data)
-      fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}`, {
-        headers: {'Content-Type': 'application/json'},
-        method: "PUT",
-        body: JSON.stringify(data)
-        })
-    }
+      handleImagePanelShow() {
+        if (this.state.imagePanelDisplay === 'none') {
+          this.setState({imagePanelDisplay: 'inline'})
+        } else {this.setState({imagePanelDisplay: 'none'})}
+      }
+
+      handleImageResize(event) {
+        const width = event.target.style.width.toString()
+        const height = event.target.style.height.toString()
+        const data = {panel: {
+          "id": this.state.panel_id,
+          "image_width": width,
+          "image_height": height
+        }}
+
+        console.log(width, height)
+        console.log(event.target.style)
+        if (width != 0 && height !=0) {this.setState({image_width: width,
+                                                  image_height: height })
+
+        fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}`, {
+          headers: {'Content-Type': 'application/json'},
+          method: "PUT",
+          body: JSON.stringify(data)
+          })
+        }
+      }
+
+      handleImageReposition(){
+
+        const data = {panel : {
+          "id": this.state.panel_id,
+          "image_position_x": this.state.position.x,
+          "image_position_y": this.state.position.y
+        }}
+
+        console.log(data)
+        fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}`, {
+          headers: {'Content-Type': 'application/json'},
+          method: "PUT",
+          body: JSON.stringify(data)
+          })
+      }
 
 
-    handleChoiceBodyTextChange(event) {
-      this.setState({new_choice_body_text: event.target.value})
-    }
+      handleChoiceBodyTextChange(event) {
+        this.setState({new_choice_body_text: event.target.value})
+      }
 
-    handleChoiceSubmit(event) {
-        event.preventDefault()
+      handleChoiceSubmit(event) {
+          event.preventDefault()
 
-    }
+      }
 
-    handleChoiceChange(event) {
+      handleChoiceChange(event) {
 
        if (event.key === "Enter") {
                 var data = {choice: {
@@ -197,166 +206,174 @@ class NewPanelForm extends Component{
         }).then(json => {
           console.log(data)
 
-        })
+          })
+        }
       }
-    }
 
-    handleBodyTextSubmit(event) {
-
-    event.preventDefault()
-    var data = {panel: {
-
-      "id": this.state.panel_id,
-      "body_text": this.state.body_text,
-      "story_id":this.state.story_id
-    }};
-    console.log(data);
-    fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}`, {
-      headers: {'Content-Type': 'application/json'},
-      method: "PUT",
-      body: JSON.stringify(data)
-    })
-  }
-    handleDelete(event) {
+      handleBodyTextSubmit(event) {
 
       event.preventDefault()
       var data = {panel: {
-        "id": this.state.panel_id
-      }}
+
+        "id": this.state.panel_id,
+        "body_text": this.state.body_text,
+        "story_id":this.state.story_id
+      }};
       console.log(data);
       fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}`, {
         headers: {'Content-Type': 'application/json'},
-          method: "DELETE",
-          body: JSON.stringify(data)
-        }).then(json => {
-          console.log(data)
-          window.location.assign(`/stories/${this.state.story_id}`)
+        method: "PUT",
+        body: JSON.stringify(data)
+      })
+    }
+      handleDelete(event) {
 
-        })
+        event.preventDefault()
+        var data = {panel: {
+          "id": this.state.panel_id
+        }}
+        console.log(data);
+        fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}`, {
+          headers: {'Content-Type': 'application/json'},
+            method: "DELETE",
+            body: JSON.stringify(data)
+          }).then(json => {
+            console.log(data)
+            window.location.assign(`/stories/${this.state.story_id}`)
+
+          })
+      }
+
+      handleDrag(e, ui) {
+
+        console.log(ui)
+        this.setState({
+          position: {
+            x: ui.x,
+            y: ui.y,
+          }
+
+        });
+        console.log(this.state.position)
+      }
+
+
+    render(){
+      const imageStyle = {
+        height: this.state.image_height,
+        width: this.state.image_width,
+        transform: "translate(500px, 0px)"
+      }
+
+      const imagePanelStyle = {
+      display: this.state.imagePanelDisplay,
     }
 
-    handleDrag(e, ui) {
-
-      console.log(ui)
-      this.setState({
-        position: {
-          x: ui.x,
-          y: ui.y,
+      //Start code for enabling resize of image div to smaller than starting size
+      //see http://stackoverflow.com/questions/18178301/how-can-i-use-css-resize-to-resize-an-element-to-a-height-width-less-than-init
+      function resizableStart(e){
+        this.originalW = this.clientWidth;
+        this.originalH = this.clientHeight;
+        this.onmousemove = resizableCheck;
+        this.onmouseup = this.onmouseout = resizableEnd;
+      }
+      function resizableCheck(e){
+        if(this.clientWidth !== this.originalW || this.clientHeight !== this.originalH) {
+            this.originalX = e.clientX;
+            this.originalY = e.clientY;
+            this.onmousemove = resizableMove;
+       }
+      }
+      function resizableMove(e){
+        var newW = this.originalW + e.clientX - this.originalX,
+            newH = this.originalH + e.clientY - this.originalY;
+        if(newW < this.originalW){
+            this.style.width = newW + 'px';
         }
-
-      });
-      console.log(this.state.position)
-    }
-
-
-  render(){
-    const imageStyle = {
-      height: this.state.image_height,
-      width: this.state.image_width,
-      transform: "translate(500px, 0px)"
-    }
-
-    //Start code for enabling resize of image div to smaller than starting size
-    //see http://stackoverflow.com/questions/18178301/how-can-i-use-css-resize-to-resize-an-element-to-a-height-width-less-than-init
-    function resizableStart(e){
-      this.originalW = this.clientWidth;
-      this.originalH = this.clientHeight;
-      this.onmousemove = resizableCheck;
-      this.onmouseup = this.onmouseout = resizableEnd;
-    }
-    function resizableCheck(e){
-      if(this.clientWidth !== this.originalW || this.clientHeight !== this.originalH) {
-          this.originalX = e.clientX;
-          this.originalY = e.clientY;
-          this.onmousemove = resizableMove;
-     }
-    }
-    function resizableMove(e){
-      var newW = this.originalW + e.clientX - this.originalX,
-          newH = this.originalH + e.clientY - this.originalY;
-      if(newW < this.originalW){
-          this.style.width = newW + 'px';
+        if(newH < this.originalH){
+            this.style.height = newH + 'px';
+        }
       }
-      if(newH < this.originalH){
-          this.style.height = newH + 'px';
+      function resizableEnd(){
+        this.onmousemove = this.onmouseout = this.onmouseup = null;
       }
-    }
-    function resizableEnd(){
-      this.onmousemove = this.onmouseout = this.onmouseup = null;
-    }
-    var els = document.getElementsByClassName('resizable');
-      for(var i=0, len=els.length; i<len; ++i){
-      els[i].onmouseover = resizableStart;
-      }
-    //end of smaller resize code.
+      var els = document.getElementsByClassName('resizable');
+        for(var i=0, len=els.length; i<len; ++i){
+        els[i].onmouseover = resizableStart;
+        }
+      //end of smaller resize code.
 
 
-    return(
-    <div className="container">
-      <NavBar/>
-              <ReactCSSTransitionGroup
-          transitionName="example"
-          transitionAppear={true}
-          transitionAppearTimeout={500}
-          transitionEnter={true}
-          transitionEnterTimeout={600}
-          transitionLeave={false}>
+      return(
+      <div className="container">
+        <NavBar/>
+                <ReactCSSTransitionGroup
+            transitionName="example"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
+            transitionEnter={true}
+            transitionEnterTimeout={600}
+            transitionLeave={false}>
 
 
-      <div>
-              <div className="panel-form">
-          <form className="form" onSubmit={this.handleImageSubmit}>
-            <label>
-              <input type="text" value={this.state.image}  />
-            </label>
-            <input className="waves-effect waves-light btn" type="submit" value="Submit" />
-          </form>
+        <div>
+
+          <div className="panel-form" style={imagePanelStyle} >
+            <form className="form" onSubmit={this.handleImageSubmit}>
+              <label>
+                <input type="text" value={this.state.image}  />
+              </label>
+              <input className="waves-effect waves-light btn" type="submit" value="Submit" />
+            </form>
+          </div>
+          <div onMouseUp={this.handleImageResize}>
+            <Draggable handle="strong" onDrag={this.handleDrag} position={this.state.position} onStop={this.handleImageReposition} >
+              <div className="image-frame resizable"  style={imageStyle}  >
+                <div className="image-form-icon">
+                  <i className="fa fa-external-link " onClick={this.handleImagePanelShow}/>
+                </div>
+                <strong className="cursor">
+                  <div className = "drag-icon">
+                    <i className="fa fa-arrows"/>
+                  </div>
+                </strong>
+                <img src={this.state.image} className="panel-img" alt="Story"/>
+              </div>
+            </Draggable>
+          </div>
         </div>
-        <div onMouseUp={this.handleImageResizeAndMove}>
-        <Draggable handle="strong" onDrag={this.handleDrag} position={this.state.position} onStop={this.handleImageReposition} >
-        <div className="image-frame resizable"  style={imageStyle}  >
-          <strong className="cursor"><div>Drag here</div></strong>
-          <img src={this.state.image} className="panel-img" alt="Story"/>
-        </div>
-        </Draggable>
-        </div>
-
-      </div>
-
-
-      <div>
-
+        <div>
           <div className="body-text-panel-form">
             <form className="form" onSubmit={this.handleBodyTextSubmit}>
               <label>
               <br/>
-              <textarea className="bodyTextForm" name="body_text" value={this.state.body_text} onChange={this.handleBodyTextChange} />
-                </label>
-                <br/>
-                <input className="waves-effect waves-light btn" type="submit" value="Submit" />
+                <textarea className="bodyTextForm" name="body_text" value={this.state.body_text} onChange={this.handleBodyTextChange} />
+              </label>
+              <br/>
+              <input className="waves-effect waves-light btn" type="submit" value="Submit" />
             </form>
           </div>
-          </div>
-          <ChoicesEdit choices={this.state.choices}
-                       handleChoiceChange={this.handleChoiceChange}
-                       story_id={this.state.story_id}
-                       panel_id={this.state.panel_id}
-                       handleChoiceAdd={this.handleChoiceAdd}
-                        />
+        </div>
+        <ChoicesEdit choices={this.state.choices}
+                      handleChoiceChange={this.handleChoiceChange}
+                      story_id={this.state.story_id}
+                      panel_id={this.state.panel_id}
+                      handleChoiceAdd={this.handleChoiceAdd}
+                      />
 
-      <div className="back-btn">
-        <Link to={`/stories/${this.state.story_id}/`} onClick={StoryChart }>
-        <Button>Back to the Chart!</Button>
-        </Link>
-      </div>
-      <Button className="delete-btn" onClick={this.handleDelete} style={{display: this.state.display}}>Delete this Panel</Button>
+        <div className="back-btn">
+          <Link to={`/stories/${this.state.story_id}/`} onClick={StoryChart }>
+            <Button>Back to the Chart!</Button>
+          </Link>
+        </div>
+        <Button className="delete-btn" onClick={this.handleDelete} style={{display: this.state.display}}>Delete this Panel</Button>
 
 
-  </ReactCSSTransitionGroup>
-  </div>
-  );
-}
-}
+        </ReactCSSTransitionGroup>
+        </div>
+      );
+    }
+  }
 
 
 export default NewPanelForm;
