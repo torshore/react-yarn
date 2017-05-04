@@ -80,7 +80,7 @@ class NewPanelForm extends Component{
       })
       .catch(err => console.log(err))
 
-}
+    }
       componentDidMount() {
 
         this.getImageandBodyText()
