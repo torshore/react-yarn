@@ -33,8 +33,11 @@ class StoryChart extends Component {
     .then((response) => response.json())
     .then((data) => {
 
-      this.setState({firstPanel: data.data[0].body_text})
-
+      data.data.map((panel) => {
+        if (panel.index === 1) {
+          this.setState({firstPanel: panel.body_text})
+        }
+      })
     })
     .catch(err => console.log(err))
 

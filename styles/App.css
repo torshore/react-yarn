@@ -106,13 +106,11 @@ body {
 
 .panel-form {
   background-color: white;
-  width: 50vw;
-  height: 10vh;
   border: 0.5em solid black;
   z-index: 99;
   left: 25%;
   position: absolute;
-  bottom: 0;
+
 
 }
 
@@ -187,6 +185,7 @@ body {
 .form {
   margin: 20px;
   font-size: 100%;
+  resize:both;
 }
 .form label {
   font-size: 150%;
@@ -283,10 +282,6 @@ body {
   margin-top: 15%;
 }
 
-.bodyTextForm {
-  height: 10em;
-  width: 15em;
-}
 
 .body-text-panel-form {
   background-color: white;
@@ -384,4 +379,16 @@ body {
 
 .undo-btn:hover {
   color: #3c7b56  ;
+}
+
+.image-panel-form {
+  background-color: white;
+  width: 50vw;
+  height: 10vh;
+  border: 0.5em solid black;
+  z-index: 99;
+  left: 25%;
+  position: absolute;
+  bottom: 0;
+
 }
