@@ -52,7 +52,7 @@ class NewPanelForm extends Component{
       bodyTextPosition: {
         x:540, y: -580
       },
-      backgroundColor: "white"
+      backgroundColor: ""
 
 
     };
@@ -73,7 +73,8 @@ class NewPanelForm extends Component{
                        body_text_height: data.data.body_text_height,
                        body_text_width: data.data.body_text_width,
                        imagePosition: {x: data.data.image_position_x, y: data.data.image_position_y},
-                       bodyTextPosition: {x: data.data.body_text_position_x, y: data.data.body_text_position_y}
+                       bodyTextPosition: {x: data.data.body_text_position_x, y: data.data.body_text_position_y},
+                       backgroundColor: data.data.body_text_background_color
                       })
 
       })
@@ -150,7 +151,18 @@ class NewPanelForm extends Component{
       }
 
       handleColorChange(event) {
-          this.setState({backgroundColor: event.target.value})
+          this.setState({backgroundColor: event.target.value});
+          console.log("hi", event.target.value)
+          var data = {panel: {
+            "id": this.state.panel_id,
+            "body_text_background_color": this.state.backgroundColor
+          }};
+          console.log('hello', data)
+          fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}`, {
+            headers: {'Content-Type': 'application/json'},
+            method: "PUT",
+            body: JSON.stringify(data)
+            })
       };
 
 
