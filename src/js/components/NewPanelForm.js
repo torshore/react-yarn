@@ -30,6 +30,7 @@ class NewPanelForm extends Component{
     this.handleBodyTextSizeChange = this.handleBodyTextSizeChange.bind(this)
     this.handleBodyTextDrag = this.handleBodyTextDrag.bind(this)
     this.handleBodyTextReposition = this.handleBodyTextReposition.bind(this)
+    this.handleColorChange = this.handleColorChange.bind(this)
 
     this.state = {
       choices: [],
@@ -50,7 +51,9 @@ class NewPanelForm extends Component{
       body_text_width: "",
       bodyTextPosition: {
         x:540, y: -580
-      }
+      },
+      backgroundColor: "white"
+
 
     };
   }
@@ -146,6 +149,13 @@ class NewPanelForm extends Component{
         this.setState({image: event.target.value});
       }
 
+      handleColorChange(event) {
+          this.setState({backgroundColor: event.target.value})
+      };
+
+
+
+
       handleImagePanelShow() {
         if (this.state.imagePanelDisplay === 'none') {
           this.setState({imagePanelDisplay: 'inline'})
@@ -163,7 +173,7 @@ class NewPanelForm extends Component{
 
         console.log(width, height)
         console.log(event.target.style)
-        if (width != 0 && height !=0) {this.setState({image_width: width,
+        if (width != 0 && height != 0) {this.setState({image_width: width,
                                                   image_height: height })
 
         fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}`, {
@@ -247,7 +257,7 @@ class NewPanelForm extends Component{
         }}
         console.log(width, height)
 
-        if (width != 0 && height !=0) {this.setState({body_text_width: width,
+        if (width != 0 && height != 0) {this.setState({body_text_width: width,
                                                   body_text_height: height })
 
         fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}`, {
@@ -346,6 +356,10 @@ class NewPanelForm extends Component{
         width: this.state.body_text_width
       }
 
+      const background_color = {
+        background: this.state.backgroundColor
+      }
+
       //Start code for enabling resize of image div to smaller than starting size
       //see http://stackoverflow.com/questions/18178301/how-can-i-use-css-resize-to-resize-an-element-to-a-height-width-less-than-init
       function resizableStart(e){
@@ -406,7 +420,7 @@ class NewPanelForm extends Component{
 
           <div onMouseUp={this.handleImageResize}>
             <Draggable handle="strong" onDrag={this.handleImageDrag} position={this.state.imagePosition} onStop={this.handleImageReposition} >
-              <div className="image-frame resizable"  style={imageStyle}  >
+              <div className="image-frame resizable"  style={imageStyle}>
                 <div className="image-form-icon">
                   <i className="fa fa-external-link " onClick={this.handleImagePanelShow}/>
                 </div>
@@ -421,22 +435,21 @@ class NewPanelForm extends Component{
           </div>
         </div>
         <Draggable handle="strong" onDrag={this.handleBodyTextDrag} position={this.state.bodyTextPosition} onStop={this.handleBodyTextReposition}>
-          <div className="panel-form">
-
+          <div className="panel-form" style={background_color}>
                 <strong className="cursor">
                   <div className="drag-icon">
                     <i className="fa fa-arrows"/>
                   </div>
                 </strong>
-
             <form className="form" onSubmit={this.handleBodyTextSubmit}>
+            <input type="color" onChange={this.handleColorChange} value={this.state.backgroundColor}/>
               <label>
               <br/>
                 <textarea className="bodyTextForm resizable" name="body_text" value={this.state.body_text} onChange={this.handleBodyTextChange} style={bodyTextStyle} onMouseUp={this.handleBodyTextSizeChange} />
               </label>
               <br/>
               <input className="waves-effect waves-light btn" type="submit" value="Submit" />
-            </form>
+              </form>
           </div>
         </Draggable>
 
@@ -463,10 +476,3 @@ class NewPanelForm extends Component{
 
 
 export default NewPanelForm;
-
-
-
-
-
-
-

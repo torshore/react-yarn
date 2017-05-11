@@ -105,11 +105,11 @@ body {
 }
 
 .panel-form {
-  background-color: white;
+  /*background-color: white;*/
   border: 0.5em solid black;
   z-index: 99;
   left: 25%;
-  position: absolute;
+  position:absolute;
 
 
 }
