@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ChoicesEdit from './ChoicesEdit';
-import {Button} from 'react-materialize';
+import {Button, Row, Input} from 'react-materialize';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import NavBar from './NavBar';
 import { Link } from 'react-router-dom';
@@ -31,6 +31,7 @@ class NewPanelForm extends Component{
     this.handleBodyTextDrag = this.handleBodyTextDrag.bind(this)
     this.handleBodyTextReposition = this.handleBodyTextReposition.bind(this)
     this.handleColorChange = this.handleColorChange.bind(this)
+    this.handleAlphaChange = this.handleAlphaChange.bind(this)
 
     this.state = {
       choices: [],
@@ -52,7 +53,8 @@ class NewPanelForm extends Component{
       bodyTextPosition: {
         x:540, y: -580
       },
-      backgroundColor: ""
+      backgroundColor: "",
+      aValue: 1,
 
 
     };
@@ -74,8 +76,10 @@ class NewPanelForm extends Component{
                        body_text_width: data.data.body_text_width,
                        imagePosition: {x: data.data.image_position_x, y: data.data.image_position_y},
                        bodyTextPosition: {x: data.data.body_text_position_x, y: data.data.body_text_position_y},
-                       backgroundColor: data.data.body_text_background_color
+                       backgroundColor: data.data.body_text_background_color,
+                       aValue: data.data.a_value
                       })
+
 
       })
         .catch(err => console.log(err))
@@ -151,8 +155,9 @@ class NewPanelForm extends Component{
       }
 
       handleColorChange(event) {
+
           this.setState({backgroundColor: event.target.value});
-          console.log("hi", event.target.value)
+
           var data = {panel: {
             "id": this.state.panel_id,
             "body_text_background_color": this.state.backgroundColor
@@ -165,7 +170,19 @@ class NewPanelForm extends Component{
             })
       };
 
-
+      handleAlphaChange(event){
+        this.setState({aValue: event.target.value / 100});
+        var data = {panel: {
+            "id": this.state.panel_id,
+            "a_value": this.state.aValue
+          }};
+          console.log('hello', data)
+          fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}`, {
+            headers: {'Content-Type': 'application/json'},
+            method: "PUT",
+            body: JSON.stringify(data)
+            })
+      }
 
 
       handleImagePanelShow() {
@@ -368,8 +385,14 @@ class NewPanelForm extends Component{
         width: this.state.body_text_width
       }
 
+      const rValue = parseInt(this.state.backgroundColor.slice(1,3), 16)
+      const gValue = parseInt(this.state.backgroundColor.slice(3,5), 16)
+      const bValue = parseInt(this.state.backgroundColor.slice(5,7), 16)
+      const aValue = this.state.aValue * 100
+
       const background_color = {
-        background: this.state.backgroundColor
+        'background-color': `rgba(${rValue}, ${gValue}, ${bValue}, ${this.state.aValue})`,
+
       }
 
       //Start code for enabling resize of image div to smaller than starting size
@@ -420,7 +443,7 @@ class NewPanelForm extends Component{
 
           <div>
           <div className="undo-btn">
-            <i className="fa fa-undo fa-2x" onClick={this.handleUndo}/>
+            <i className="fa fa-undo fa-lg" onClick={this.handleUndo}/>
           </div>
           <div className="image-panel-form" style={imagePanelStyle} >
             <form className="form" onSubmit={this.handleImageSubmit}>
@@ -455,6 +478,7 @@ class NewPanelForm extends Component{
                 </strong>
             <form className="form" onSubmit={this.handleBodyTextSubmit}>
             <input type="color" onChange={this.handleColorChange} value={this.state.backgroundColor}/>
+              <input type="range" onChange={this.handleAlphaChange} value={aValue} name="points"/>
               <label>
               <br/>
                 <textarea className="bodyTextForm resizable" name="body_text" value={this.state.body_text} onChange={this.handleBodyTextChange} style={bodyTextStyle} onMouseUp={this.handleBodyTextSizeChange} />
@@ -464,6 +488,8 @@ class NewPanelForm extends Component{
               </form>
           </div>
         </Draggable>
+
+
 
         <ChoicesEdit choices={this.state.choices}
                       handleChoiceChange={this.handleChoiceChange}
