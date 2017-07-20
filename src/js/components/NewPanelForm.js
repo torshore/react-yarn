@@ -32,9 +32,14 @@ class NewPanelForm extends Component{
     this.handleBodyTextReposition = this.handleBodyTextReposition.bind(this)
     this.handleColorChange = this.handleColorChange.bind(this)
     this.handleAlphaChange = this.handleAlphaChange.bind(this)
+    this.handleChoicesDrag = this.handleChoicesDrag.bind(this)
+    this.handleCurrentWordIndexChange = this.handleCurrentWordIndexChange.bind(this)
+    this.handleWordsAdd = this.handleWordsAdd.bind(this)
+    this.handleWordsRemove = this.handleWordsRemove.bind(this)
 
     this.state = {
       choices: [],
+      words: [],
       body_text: "",
       panel_id: "",
       story_id: "",
@@ -55,6 +60,10 @@ class NewPanelForm extends Component{
       },
       backgroundColor: "",
       aValue: 1,
+      currentWordIndex: 1,
+      currentWords: "",
+      currentWordId: 0
+
 
 
     };
@@ -98,10 +107,35 @@ class NewPanelForm extends Component{
       .catch(err => console.log(err))
 
     }
+
+    getWords = () => {
+      return fetch(`/panels/${this.props.match.params.panelid}/words`)
+      .then((response) => response.json())
+      .then((data) => {
+
+        if (data.data[0] !== undefined) {
+          this.setState({words: data.data,
+                       currentWords: data.data[0].content,
+                       currentWordId: data.data[this.state.currentWordIndex - 1].id
+                     })
+        }
+
+      })
+      .catch(err => console.log(err))
+
+    }
+
+
+
+
+
       componentDidMount() {
 
         this.getImageandBodyText()
         this.getChoices()
+        this.getWords()
+
+
 
       }
 
@@ -146,8 +180,53 @@ class NewPanelForm extends Component{
           })
       }
 
+
+
+
+
+      handleWordsAdd = (event) => {
+      event.preventDefault()
+        var data = {word: {
+          "panel_id": this.state.panel_id,
+          "content": "",
+
+        }};
+        console.log(data);
+        fetch(`/panels/${this.state.panel_id}/words`, {
+          headers: {'Content-Type': 'application/json'},
+          method: "POST",
+          body: JSON.stringify(data)
+        }).then(json => {
+              this.getWords()
+              this.setState({currentWordIndex: this.state.words.length + 1})
+          })
+      }
+
+      handleWordsRemove = (event) => {
+      event.preventDefault()
+        var data = {word: {
+          "id": this.state.words[this.state.currentWordIndex - 1].id,
+          "panel_id": this.state.panel_id
+
+
+        }};
+        console.log(data);
+        fetch(`/panels/${this.state.panel_id}/words/${this.state.words[this.state.currentWordIndex - 1].id}`, {
+          headers: {'Content-Type': 'application/json'},
+          method: "DELETE",
+          body: JSON.stringify(data)
+        }).then(json => {
+              this.getWords()
+              if (this.state.currentWordIndex !== 1) {
+                this.setState({currentWordIndex: this.state.currentWordIndex - 1})
+              }
+
+          })
+        this.getWords()
+      }
+
       handleBodyTextChange(event) {
-        this.setState({body_text: event.target.value});
+        this.setState({currentWords: event.target.value});
       }
 
       handleImageChange(event) {
@@ -182,6 +261,16 @@ class NewPanelForm extends Component{
             method: "PUT",
             body: JSON.stringify(data)
             })
+      }
+
+      handleCurrentWordIndexChange(event){
+        this.setState({currentWordIndex: event.target.value,
+                       currentWords: this.state.words[event.target.value - 1].content,
+                       currentWordId: this.state.words[event.target.value - 1].id
+
+                     });
+
+
       }
 
 
@@ -259,17 +348,30 @@ class NewPanelForm extends Component{
         }
       }
 
+      handleChoicesDrag(e, ui) {
+
+        console.log(ui)
+        this.setState({
+          choicesPosition: {
+            x: ui.x,
+            y: ui.y,
+          }
+
+        });
+        console.log(this.state.choicesPosition)
+      }
+
       handleBodyTextSubmit(event) {
 
       event.preventDefault()
-      var data = {panel: {
+      var data = {word: {
 
-        "id": this.state.panel_id,
-        "body_text": this.state.body_text,
-        "story_id":this.state.story_id
+        "id": this.state.currentWordId,
+        "content": this.state.currentWords,
+
       }};
       console.log(data);
-      fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}`, {
+      fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}/words/${this.state.currentWordId}`, {
         headers: {'Content-Type': 'application/json'},
         method: "PUT",
         body: JSON.stringify(data)
@@ -317,7 +419,8 @@ class NewPanelForm extends Component{
 
         event.preventDefault()
         var data = {panel: {
-          "id": this.state.panel_id
+          "id": this.state.panel_id,
+          "story_id": this.state.story_id
         }}
         console.log(data);
         fetch(`/stories/${this.state.story_id}/panels/${this.state.panel_id}`, {
@@ -382,7 +485,8 @@ class NewPanelForm extends Component{
 
       const bodyTextStyle = {
         height: this.state.body_text_height,
-        width: this.state.body_text_width
+        width: this.state.body_text_width,
+        position: 'relative'
       }
 
       const rValue = parseInt(this.state.backgroundColor.slice(1,3), 16)
@@ -479,25 +583,36 @@ class NewPanelForm extends Component{
             <form className="form" onSubmit={this.handleBodyTextSubmit}>
             <input type="color" onChange={this.handleColorChange} value={this.state.backgroundColor}/>
               <input type="range" onChange={this.handleAlphaChange} value={aValue} name="points"/>
+              <input type="range" name="points" min='1' max={this.state.words.length} value={this.state.currentWordIndex} onChange={this.handleCurrentWordIndexChange}/>
               <label>
               <br/>
-                <textarea className="bodyTextForm resizable" name="body_text" value={this.state.body_text} onChange={this.handleBodyTextChange} style={bodyTextStyle} onMouseUp={this.handleBodyTextSizeChange} />
+                <textarea className="bodyTextForm resizable" name="body_text" value={this.state.currentWords} style={bodyTextStyle} onMouseUp={this.handleBodyTextSizeChange} onChange={this.handleBodyTextChange} onSubmit={this.handleBodyTextSubmit} />
               </label>
               <br/>
               <input className="waves-effect waves-light btn" type="submit" value="Submit" />
+              <Button floating className='grey' waves='light' icon='add' onClick={this.handleWordsAdd}/>
+              <Button floating className='grey' waves='light' icon='remove' onClick={this.handleWordsRemove}/>
               </form>
           </div>
         </Draggable>
 
+        <Draggable handle="strong" onDrag={this.handleChoicesDrag}>
+          <div className="choice-panel-form" >
 
+                  <strong className="cursor">
+                    <div className="drag-icon">
+                      <i className="fa fa-arrows"/>
+                    </div>
+                  </strong>
 
-        <ChoicesEdit choices={this.state.choices}
-                      handleChoiceChange={this.handleChoiceChange}
-                      story_id={this.state.story_id}
-                      panel_id={this.state.panel_id}
-                      handleChoiceAdd={this.handleChoiceAdd}
-                      />
-
+            <ChoicesEdit choices={this.state.choices}
+                          handleChoiceChange={this.handleChoiceChange}
+                          story_id={this.state.story_id}
+                          panel_id={this.state.panel_id}
+                          handleChoiceAdd={this.handleChoiceAdd}
+                          />
+            </div>
+         </Draggable>
         <div className="back-btn">
           <Link to={`/stories/${this.state.story_id}/`} onClick={StoryChart }>
             <Button>Back to the Chart!</Button>

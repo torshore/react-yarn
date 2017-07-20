@@ -1,17 +1,20 @@
+
 import React from 'react';
 import {Button} from 'react-materialize';
 
 class ChoicesEdit extends React.Component {
 
   render(){
+    console.log('haloo', this.props.choices)
     return (
-                <div className="choice-panel-form" >
+                <div>
             { this.props.choices.map((choice, index) => {
               return (
-                <div key={choice.id} className="choice-box" >
+                <div key={index} className="choice-box" >
                   <div  >
 
-                      <input defaultValue={choice.body_text}
+                      <input type="text"
+                             defaultValue={choice.body_text}
                              name={choice.id}
                              onKeyUp={this.props.handleChoiceChange}
                              label={choice.story_id}
@@ -29,4 +32,3 @@ class ChoicesEdit extends React.Component {
 
 
 export default ChoicesEdit;
-
