@@ -299,10 +299,11 @@ body {
   border: 5px solid black;
   z-index: 99;
   left: 900px;
-  position:fixed;
+  position: relative;
   bottom:6em;
   max-height: 20em;
   overflow-y: auto;
+
 }
 
 .back-btn {

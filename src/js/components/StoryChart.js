@@ -37,6 +37,7 @@ class StoryChart extends Component {
         if (panel.index === 1) {
           this.setState({firstPanel: panel.body_text})
         }
+        return {}
       })
     })
     .catch(err => console.log(err))
